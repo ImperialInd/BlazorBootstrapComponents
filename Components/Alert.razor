@@ -1,0 +1,47 @@
+﻿<div class="alert alert-@Color.ToString().ToLower()" role="alert">
+	@if (HeaderTemplate != null)
+	{
+		@HeaderTemplate
+		<hr />
+	}
+	else
+	{
+		<h4 class="alert-heading">@HeaderText</h4>
+		<hr />
+	}
+
+	@if (BodyTemplate != null)
+	{
+		@BodyTemplate
+	}
+	else
+	{
+		<p>@BodyText</p>
+	}
+
+	@if (FooterTemplate != null)
+	{
+		<hr />
+		@FooterTemplate
+	}
+	else
+	{
+		<hr />
+		<p>@FooterText</p>
+	}
+</div>
+
+@code {
+	[Parameter] public AlertColor Color { get; set; }
+
+	[Parameter] public string HeaderText { get; set; }
+	[Parameter] public RenderFragment HeaderTemplate { get; set; }
+
+	[Parameter] public string BodyText { get; set; }
+	[Parameter] public RenderFragment BodyTemplate { get; set; }
+
+	[Parameter] public string FooterText { get; set; }
+	[Parameter] public RenderFragment FooterTemplate { get; set; }
+
+	
+}
