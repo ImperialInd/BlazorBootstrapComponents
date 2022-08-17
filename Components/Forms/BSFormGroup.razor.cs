@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BlazorBootstrapComponents.Components.Forms;
 
-public partial class FormGroup
+public partial class BSFormGroup
 {
-
 	[Parameter] public string Class { get; set; } = string.Empty;
 	[Parameter] public string Title { get; set; } = string.Empty;
 	[Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Empty;
