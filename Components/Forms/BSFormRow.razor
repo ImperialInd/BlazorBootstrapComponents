@@ -1,0 +1,14 @@
+﻿@{
+	string _class = string.Concat("row", Class).Trim();
+}
+
+@if (RowTemplate == null)
+{
+<div class="@_class">
+	@ChildContent
+</div>
+}
+else
+{
+	@RowTemplate
+}

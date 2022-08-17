@@ -1,0 +1,19 @@
+﻿@{
+	string _class = string.Concat("card mb-3 w-100 ",
+						(Title.Length == 0 ? "mt-3 " : ""),
+						Class,
+						GenerateFunctions.GenerateBorderColor(BorderColor),
+						GenerateFunctions.GenerateBackgroundColor(Background)).Trim();
+	string _titleClass = string.Concat("card-header fw-bold bg-transparent mb-0 ",
+								(Title.Length > 0 ? "mt-3 " : "")).Trim();
+}
+
+@if (Title.Length > 0)
+{
+	<label for=@Id class="@_titleClass">@Title</label>
+}
+<div id=@Id class="@_class">
+	<div class="card-body">
+		@ChildContent
+	</div>
+</div>
