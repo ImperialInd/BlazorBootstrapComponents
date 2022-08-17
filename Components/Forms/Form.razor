@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@typeparam TModel
+
+<EditForm Model=@Model>
+	<div class="container-fluid">
+		@ChildContent(Model)
+	</div>
+</EditForm>
