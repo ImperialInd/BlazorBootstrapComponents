@@ -1,0 +1,16 @@
+﻿@{
+	string _class = string.Concat("col-form-label ",
+								GenerateWidth(),
+								GenerateFunctions.GenerateFormLabelControlSize(Size),
+								GenerateFunctions.GenerateTextAlignment(MediaAlignment),
+								(Bold ? "fw-bold " : ""),
+								GenerateFunctions.GenerateFontSize(FontSize),
+								GenerateFunctions.GenerateTextColor(Color)).Trim();
+	if (_class.Length > 0)
+	{
+		AdditionalAttributes.Remove("class");
+		AdditionalAttributes.Add("class", _class);
+	}
+
+}
+<label @attributes=@AdditionalAttributes>@ChildContent</label>

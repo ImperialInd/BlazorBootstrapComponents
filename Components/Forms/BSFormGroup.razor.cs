@@ -10,8 +10,9 @@ namespace BlazorBootstrapComponents.Components.Forms;
 
 public partial class BSFormGroup
 {
-	[Parameter] public string Class { get; set; } = string.Empty;
 	[Parameter] public string Title { get; set; } = string.Empty;
+	[Parameter] public TextColorEnum TitleColor { get; set; } = TextColorEnum.Empty;
+	[Parameter] public FontSizeEnum TitleSize { get; set; } = FontSizeEnum.Empty;
 	[Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Empty;
 	[Parameter] public BackgroundEnum Background { get; set; } = BackgroundEnum.Empty;
 	[Parameter] public RenderFragment ChildContent { get; set; }

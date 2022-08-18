@@ -1,0 +1,51 @@
+﻿@using BlazorBootstrapComponents.Enums
+@using Microsoft.AspNetCore.Components.Forms
+
+@{
+	string _class = string.Concat("form-control ",
+							GenerateFunctions.GenerateBackgroundColor(Background),
+							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
+
+	if (_class.Length > 0)
+	{
+		AdditionalAttributes.Remove("class");
+		AdditionalAttributes.Add("class", _class);
+	}
+	if (PlaceHolder != null)
+	{
+		AdditionalAttributes.Remove("placeholder");
+		AdditionalAttributes.Add("placeholder", PlaceHolder);
+	}
+	@if (FloatingLabel && PlaceHolder == null)
+	{
+		AdditionalAttributes.Remove("placeholder");
+		AdditionalAttributes.Add("placeholder", "");
+	}
+}
+@if (HorizontalLayout)
+{
+	<div class="row @(AddMargin ? "mb-3 " : "")">
+		<BSColumnFormLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnFormLabel>
+		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
+			<InputText id=@Id DisplayName=@Title @bind-Value=@Value @attributes=@AdditionalAttributes />
+		</div>
+	</div>
+}
+else
+{
+	@if (FloatingLabel)
+	{
+		<div class="form-floating">
+			<InputText id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes />
+			<BSFormLabel For=@Id>@Title</BSFormLabel>
+		</div>
+	}
+	else
+	{
+		@if (Title != null)
+		{
+			<BSFormLabel For=@Id>@Title</BSFormLabel>
+		}
+		<InputText id=@Id DisplayName=@Title @bind-Value=@Value @attributes=@AdditionalAttributes />
+	}
+}
