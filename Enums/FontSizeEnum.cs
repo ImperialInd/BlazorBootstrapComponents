@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlazorBootstrapComponents.Enums;
 
-public enum BorderColorEnum
+public enum FontSizeEnum
 {
 	Empty,
-	Primary,
-	Secondary,
-	Success,
-	Danger,
-	Warning,
-	Info,
-	Light,
-	Dark,
-	White
+	S1,
+	S2,
+	S3,
+	S4,
+	S5,
+	S6
 }

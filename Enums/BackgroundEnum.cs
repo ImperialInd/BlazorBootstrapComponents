@@ -9,15 +9,15 @@ namespace BlazorBootstrapComponents.Enums;
 public enum BackgroundEnum
 {
 	Empty,
-	primary,
-	secondary,
-	success,
-	danger,
-	warning,
-	info,
-	light,
-	dark,
-	body,
-	white,
-	transparent
+	Primary,
+	Secondary,
+	Success,
+	Danger,
+	Warning,
+	Info,
+	Light,
+	Dark,
+	Body,
+	White,
+	Transparent
 }

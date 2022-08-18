@@ -1,8 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @typeparam TModel
 
-<EditForm Model=@Model>
-	<div class="container-fluid">
-		@ChildContent(Model)
-	</div>
-</EditForm>
+@if (OnSubmitCallback.HasDelegate)
+{
+	<EditForm Model=@Model OnSubmit=@OnSubmitHandler>
+		<div class="container-fluid">
+			@if (ShowValidation)
+			{
+				<DataAnnotationsValidator />
+			}
+			@if (ShowValidationSummary)
+			{
+				<ValidationSummary />
+			}
+			@ChildContent(Model)
+			<input type="submit" class="btn btn-primary" value="Save" />
+		</div>
+	</EditForm>
+}
+else
+{
+	<EditForm Model=@Model OnInvalidSubmit=@OnInvalidSubmitHandler OnValidSubmit=@OnValidSubmitHandler>
+		<div class="container-fluid">
+			@if (ShowValidation)
+			{
+				<DataAnnotationsValidator />
+			}
+			@if (ShowValidationSummary)
+			{
+				<ValidationSummary />
+			}
+			@ChildContent(Model)
+			<input type="submit" class="btn btn-primary" value="Save" />
+		</div>
+	</EditForm>
+}

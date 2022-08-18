@@ -1,10 +1,11 @@
 ﻿@{
 	string _class = string.Concat("card mb-3 w-100 ",
 						(Title.Length == 0 ? "mt-3 " : ""),
-						Class,
 						GenerateFunctions.GenerateBorderColor(BorderColor),
 						GenerateFunctions.GenerateBackgroundColor(Background)).Trim();
-	string _titleClass = string.Concat("card-header fw-bold bg-transparent mb-0 ",
+	string _titleClass = string.Concat("fw-bold bg-transparent mb-0 ",
+								GenerateFunctions.GenerateTextColor(TitleColor),
+								GenerateFunctions.GenerateFontSize(TitleSize),
 								(Title.Length > 0 ? "mt-3 " : "")).Trim();
 }
 
