@@ -11,6 +11,7 @@ namespace BlazorBootstrapComponents.Components;
 
 public partial class BSLabel
 {
+
     protected override void OnInitialized()
     {
         if (For == string.Empty) throw new Exception("You must supply the [For] id of the control this label belongs to!");
