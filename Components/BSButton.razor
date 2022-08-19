@@ -14,41 +14,31 @@
 
 	if (Disabled)
 	{
-		AllOtherAttributes.Remove("disabled");
-		AllOtherAttributes.Add("disabled", true);
+		AdditionalAttributes.Remove("disabled");
+		AdditionalAttributes.Add("disabled", true);
 	}
 	else
 	{
-		AllOtherAttributes.Remove("disabled");
+		AdditionalAttributes.Remove("disabled");
 	}
 
 	if (AsClose)
 	{
-		AllOtherAttributes.Remove("type");
-		AllOtherAttributes.Remove("aria-label");
-		AllOtherAttributes.Add("type", "button");
-		AllOtherAttributes.Add("aria-label", "Close");
+		AdditionalAttributes.Remove("type");
+		AdditionalAttributes.Remove("aria-label");
+		AdditionalAttributes.Add("type", "button");
+		AdditionalAttributes.Add("aria-label", "Close");
 	}
 	else
 	{
-		AllOtherAttributes.Remove("type");
-		AllOtherAttributes.Remove("aria-label");
-	}
-
-	if(AutoComplete)
-	{
-		AllOtherAttributes.Remove("autocomplete");
-		AllOtherAttributes.Add("autocomplete", "on");
-	}
-	else
-	{
-		AllOtherAttributes.Remove("autocomplete");
+		AdditionalAttributes.Remove("type");
+		AdditionalAttributes.Remove("aria-label");
 	}
 }
 
 @if (_style.Length > 0)
 {
-	<button class=@_class style=@_style @attributes=AllOtherAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+	<button class=@_class style=@_style @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
 		@if (Icon != IconNamesEnum.Empty)
 		{
 			<BSIcon Icon=@Icon>&nbsp;</BSIcon>
@@ -58,7 +48,7 @@
 }
 else
 {
-	<button class=@_class @attributes=AllOtherAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+	<button class=@_class @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
 		@if (Icon != IconNamesEnum.Empty)
 		{
 			<BSIcon Icon=@Icon>&nbsp;</BSIcon>

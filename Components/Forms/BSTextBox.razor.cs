@@ -24,6 +24,7 @@ public partial class BSTextBox
 	[Parameter] public bool FloatingLabel { get; set; }
 	[Parameter] public bool HorizontalLayout { get; set; }
 	[Parameter] public string PlaceHolder { get; set; }
+	[Parameter] public bool AutoComplete { get; set; }
 	[Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
 	[Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
 	[Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = 
