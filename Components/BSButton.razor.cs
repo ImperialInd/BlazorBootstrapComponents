@@ -18,8 +18,7 @@ public partial class BSButton
 	[Parameter] public string Height { get; set; } = string.Empty;
 	[Parameter] public bool Bold { get; set; }
 	[Parameter] public bool Underline { get; set; }
-	[Parameter] public bool AutoComplete { get; set; }
-	[Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AllOtherAttributes { get; set; } = new Dictionary<string, object>();
+	[Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
 	[Parameter] public EventCallback OnClick { get; set; }
 	[Parameter] public EventCallback OnDoubleClick { get; set; }
 	[Parameter] public IconNamesEnum Icon { get; set; } = IconNamesEnum.Empty;

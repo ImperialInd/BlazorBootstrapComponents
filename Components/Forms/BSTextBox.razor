@@ -11,16 +11,30 @@
 		AdditionalAttributes.Remove("class");
 		AdditionalAttributes.Add("class", _class);
 	}
+
 	if (PlaceHolder != null)
 	{
 		AdditionalAttributes.Remove("placeholder");
 		AdditionalAttributes.Add("placeholder", PlaceHolder);
 	}
-	@if (FloatingLabel && PlaceHolder == null)
+
+	if (FloatingLabel && PlaceHolder == null)
 	{
 		AdditionalAttributes.Remove("placeholder");
 		AdditionalAttributes.Add("placeholder", "");
 	}
+
+	if (AutoComplete)
+	{
+		AdditionalAttributes.Remove("autocomplete");
+		AdditionalAttributes.Add("autocomplete", "on");
+	}
+	else
+	{
+		AdditionalAttributes.Remove("autocomplete");
+		AdditionalAttributes.Add("autocomplete", "off");
+	}
+
 }
 @if (HorizontalLayout)
 {
