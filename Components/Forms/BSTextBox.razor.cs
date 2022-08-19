@@ -17,7 +17,7 @@ public partial class BSTextBox
 	}
 	[Parameter] public bool AddMargin { get; set; } = true;
 	[Parameter] public string Value { get; set; }
-	[Parameter] public BackgroundEnum Background { get; set; } = BackgroundEnum.Empty;
+	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public FormControlSizeEnum Size { get; set; } = FormControlSizeEnum.Standard;
 	[Parameter] public string Title { get; set; }
 	[Parameter] public string Id { get; set; }

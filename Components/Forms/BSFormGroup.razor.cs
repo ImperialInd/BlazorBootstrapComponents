@@ -14,7 +14,7 @@ public partial class BSFormGroup
 	[Parameter] public TextColorEnum TitleColor { get; set; } = TextColorEnum.Empty;
 	[Parameter] public FontSizeEnum TitleSize { get; set; } = FontSizeEnum.Empty;
 	[Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Empty;
-	[Parameter] public BackgroundEnum Background { get; set; } = BackgroundEnum.Empty;
+	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 
 	public string Id { get; set; } = Guid.NewGuid().ToString();

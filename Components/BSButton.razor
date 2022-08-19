@@ -1,0 +1,68 @@
+﻿@using BlazorBootstrapComponents.Enums
+@{
+	string _class = string.Concat("btn ",
+						GetButtonBackgroundColor(),
+						(DisableTextWrapping ? "text-nowrap " : ""),
+						GetButtonOutlineColor(),
+						GetButtonSize(),
+						(Bold ? "fw-bold " : ""),
+						(AsClose ? "btn-close " : ""),
+						(Underline ? "text-decoration-underline " : "")).Trim();
+
+	string _style = string.Concat((Width.Length > 0 ? $"width: {Width}; " : ""),
+								(Height.Length > 0 ? $"height: {Height}; " : "")).Trim();
+
+	if (Disabled)
+	{
+		AllOtherAttributes.Remove("disabled");
+		AllOtherAttributes.Add("disabled", true);
+	}
+	else
+	{
+		AllOtherAttributes.Remove("disabled");
+	}
+
+	if (AsClose)
+	{
+		AllOtherAttributes.Remove("type");
+		AllOtherAttributes.Remove("aria-label");
+		AllOtherAttributes.Add("type", "button");
+		AllOtherAttributes.Add("aria-label", "Close");
+	}
+	else
+	{
+		AllOtherAttributes.Remove("type");
+		AllOtherAttributes.Remove("aria-label");
+	}
+
+	if(AutoComplete)
+	{
+		AllOtherAttributes.Remove("autocomplete");
+		AllOtherAttributes.Add("autocomplete", "on");
+	}
+	else
+	{
+		AllOtherAttributes.Remove("autocomplete");
+	}
+}
+
+@if (_style.Length > 0)
+{
+	<button class=@_class style=@_style @attributes=AllOtherAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+		@if (Icon != IconNamesEnum.Empty)
+		{
+			<BSIcon Icon=@Icon>&nbsp;</BSIcon>
+		}
+		@ChildContent
+	</button>
+}
+else
+{
+	<button class=@_class @attributes=AllOtherAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+		@if (Icon != IconNamesEnum.Empty)
+		{
+			<BSIcon Icon=@Icon>&nbsp;</BSIcon>
+		}
+		@ChildContent
+	</button>
+}

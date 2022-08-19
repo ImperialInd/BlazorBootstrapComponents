@@ -6,18 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlazorBootstrapComponents.Enums;
 
-public enum BackgroundEnum
+public enum ButtonGroupSizeEnum
 {
-	Empty,
-	Primary,
-	Secondary,
-	Success,
-	Danger,
-	Warning,
-	Info,
-	Light,
-	Dark,
-	Body,
-	White,
-	Transparent
+	Standard,
+	Large,
+	Small
 }
