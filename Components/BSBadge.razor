@@ -1,0 +1,9 @@
+﻿@using BlazorBootstrapComponents
+
+@{
+	string _class = string.Concat("badge ",
+								GenerateFunctions.GenerateBackgroundColor(BackgroundColor),
+								GenerateFunctions.GenerateContrastColor(ContrastColor),
+								GenerateFunctions.GeneratePosition(Position)).Trim();
+}
+<span class=@_class @onclick=@OnClickHandler>@ChildContent</span> 

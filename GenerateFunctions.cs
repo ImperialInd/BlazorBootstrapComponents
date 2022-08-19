@@ -10,11 +10,27 @@ namespace BlazorBootstrapComponents;
 
 public static class GenerateFunctions
 {
-	public static string GenerateBackgroundColor(BackgroundEnum BackgroundColor)
+	public static string GenerateBackgroundColor(BackgroundColorEnum BackgroundColor)
 	{
 		return BackgroundColor switch
 		{
-			>= BackgroundEnum.Primary and <= BackgroundEnum.Transparent => $"bg-{BackgroundColor.ToString().ToLower()} ",
+			>= BackgroundColorEnum.Primary and <= BackgroundColorEnum.Transparent => $"bg-{BackgroundColor.ToString().ToLower()} ",
+			_ => "",
+		};
+	}
+
+	public static string GenerateContrastColor(ContrastColorEnum Color)
+	{
+		return Color switch
+		{
+			ContrastColorEnum.Primary => "text-bg-primary ",
+			ContrastColorEnum.Secondary => "text-bg-secondary ",
+			ContrastColorEnum.Success => "text-bg-success ",
+			ContrastColorEnum.Danger => "text-bg-danger ",
+			ContrastColorEnum.Warning => "text-bg-warning ",
+			ContrastColorEnum.Info => "text-bg-info ",
+			ContrastColorEnum.Light => "text-bg-light ",
+			ContrastColorEnum.Dark => "text-bg-dark ",
 			_ => "",
 		};
 	}
@@ -41,6 +57,23 @@ public static class GenerateFunctions
 		return output;
 	}
 
+	public static string GeneratePosition(PositionEnum Position)
+	{
+		return Position switch
+		{
+			PositionEnum.TopLeft => "position-absolute top-0 start-0 translate-middle ",
+			PositionEnum.TopMiddle => "position-absolute top-0 start-50 translate-middle ",
+			PositionEnum.TopRight => "position-absolute top-0 start-100 translate-middle ",
+			PositionEnum.MiddleLeft => "position-absolute top-50 start-0 translate-middle ",
+			PositionEnum.MiddleTop => "position-absolute top-50 start-50 translate-middle ",
+			PositionEnum.MiddleRight => "position-absolute top-50 start-100 translate-middle ",
+			PositionEnum.BottomLeft => "position-absolute top-100 start-0 translate-middle ",
+			PositionEnum.BottomTop => "position-absolute top-100 start-50 translate-middle ",
+			PositionEnum.BottomRight => "position-absolute top-100 start-100 translate-middle ",
+			PositionEnum.Empty => "",
+			_ => "",
+		};
+	}
 	public static string GenerateColumnWidth(int[] MediaWidth)
 	{
 		string output = String.Empty;

@@ -1,0 +1,9 @@
+﻿@{
+	string _class = string.Concat((Vertical ? "btn-group-vertical " : "btn-group "),
+						GetButtonGroupSize()).Trim();
+}
+
+
+<div class=@_class role="group" @attributes=AllOtherAttributes>
+	@ChildContent
+</div> 
