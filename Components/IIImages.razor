@@ -1,0 +1,14 @@
+﻿@{
+	string _class = string.Concat((Responsive ? "img-fluid " : ""),
+								(Thumbnail ? "img-thumbnail " : ""),
+								(Class.Length > 0 ? Class : "")).Trim();
+
+
+	AdditionalAttributes.Remove("class");
+	if (_class.Length > 0) AdditionalAttributes.Add("class", _class);
+
+	AdditionalAttributes.Remove("alt");
+	if (Alt.Length > 0) AdditionalAttributes.Add("alt", Alt);
+
+}
+<img src=@Src @attributes=@AdditionalAttributes />
