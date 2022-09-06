@@ -190,21 +190,23 @@ public static class GenerateFunctions
 		};
 	}
 
-	public static string GenerateFormControlSize(FormControlSizeEnum Size)
+	public static string GenerateFormControlSize(ControlSizeEnum Size)
 	{
 		return Size switch
 		{
-			FormControlSizeEnum.Large => "form-control-lg ",
-			FormControlSizeEnum.Small => "form-control-sm ",
+			ControlSizeEnum.Standard => "",
+			ControlSizeEnum.Large => "form-control-lg ",
+			ControlSizeEnum.Small => "form-control-sm ",
 			_ => "",
 		};
 	}
-	public static string GenerateFormLabelControlSize(FormControlSizeEnum Size)
+	public static string GenerateFormLabelControlSize(ControlSizeEnum Size)
 	{
 		return Size switch
 		{
-			FormControlSizeEnum.Large => "col-form-label-lg ",
-			FormControlSizeEnum.Small => "col-form-label-sm ",
+			ControlSizeEnum.Standard => "",
+			ControlSizeEnum.Large => "col-form-label-lg ",
+			ControlSizeEnum.Small => "col-form-label-sm ",
 			_ => "",
 		};
 	}

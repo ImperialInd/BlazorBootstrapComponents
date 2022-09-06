@@ -4,11 +4,5 @@
 								GenerateFunctions.GenerateFormLabelControlSize(Size),
 								GenerateFunctions.GenerateFontSize(FontSize),
 								GenerateFunctions.GenerateTextColor(Color)).Trim();
-	if (_class.Length > 0)
-	{
-		AdditionalAttributes.Remove("class");
-		AdditionalAttributes.Add("class", _class);
-	}
-
 }
-<label @attributes=@AdditionalAttributes>@ChildContent</label>
+<label class=@_class @attributes=@AdditionalAttributes>@ChildContent</label>

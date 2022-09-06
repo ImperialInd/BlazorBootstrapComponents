@@ -17,7 +17,8 @@ public partial class BSForm<TModel>
 	[Parameter] public TModel Model { get; set; }
 	[Parameter] public RenderFragment<TModel> ChildContent { get; set; }
 	[Parameter] public RenderFragment<TModel> FormActions { get; set; }
-	[Parameter] public bool ShowValidation { get; set; }
+	[Parameter] public bool DataAnnotationsValidator { get; set; }
+	[Parameter] public bool ValidationSummary { get; set; }
 	[Parameter] public bool ShowValidationSummary { get; set; }
 
 	[Parameter] public EventCallback<EditContext> OnSubmitCallback { get; set; }

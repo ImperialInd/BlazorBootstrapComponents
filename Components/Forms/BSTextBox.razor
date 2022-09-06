@@ -1,47 +1,26 @@
 ﻿@using BlazorBootstrapComponents.Enums
 @using Microsoft.AspNetCore.Components.Forms
 
+
 @{
 	string _class = string.Concat("form-control ",
 							GenerateFunctions.GenerateBackgroundColor(Background),
 							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
 
-	if (_class.Length > 0)
-	{
-		AdditionalAttributes.Remove("class");
-		AdditionalAttributes.Add("class", _class);
-	}
+	AdditionalAttributes.Remove("autocomplete");
+	if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
+	else { AdditionalAttributes.Add("autocomplete", "off"); }
 
-	if (PlaceHolder != null)
-	{
-		AdditionalAttributes.Remove("placeholder");
-		AdditionalAttributes.Add("placeholder", PlaceHolder);
-	}
-
-	if (FloatingLabel && PlaceHolder == null)
-	{
-		AdditionalAttributes.Remove("placeholder");
-		AdditionalAttributes.Add("placeholder", "");
-	}
-
-	if (AutoComplete)
-	{
-		AdditionalAttributes.Remove("autocomplete");
-		AdditionalAttributes.Add("autocomplete", "on");
-	}
-	else
-	{
-		AdditionalAttributes.Remove("autocomplete");
-		AdditionalAttributes.Add("autocomplete", "off");
-	}
+	AdditionalAttributes.Remove("placeholder");
+	if (PlaceHolder.Length > 0) { AdditionalAttributes.Add("placeholder", PlaceHolder); }
 
 }
 @if (HorizontalLayout)
 {
-	<div class="row @(AddMargin ? "mb-3 " : "")">
+	<div class="row">
 		<BSColumnFormLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnFormLabel>
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<InputText id=@Id DisplayName=@Title @bind-Value=@Value @attributes=@AdditionalAttributes />
+			<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 		</div>
 	</div>
 }
@@ -50,7 +29,7 @@ else
 	@if (FloatingLabel)
 	{
 		<div class="form-floating">
-			<InputText id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes />
+			<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 			<BSFormLabel For=@Id>@Title</BSFormLabel>
 		</div>
 	}
@@ -60,6 +39,6 @@ else
 		{
 			<BSFormLabel For=@Id>@Title</BSFormLabel>
 		}
-		<InputText id=@Id DisplayName=@Title @bind-Value=@Value @attributes=@AdditionalAttributes />
+		<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 	}
 }

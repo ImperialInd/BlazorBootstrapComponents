@@ -7,7 +7,8 @@
 						GetButtonSize(),
 						(Bold ? "fw-bold " : ""),
 						(AsClose ? "btn-close " : ""),
-						(Underline ? "text-decoration-underline " : "")).Trim();
+						(Underline ? "text-decoration-underline " : ""),
+						Class).Trim();
 
 	string _style = string.Concat((Width.Length > 0 ? $"width: {Width}; " : ""),
 								(Height.Length > 0 ? $"height: {Height}; " : "")).Trim();
@@ -22,7 +23,7 @@
 		AdditionalAttributes.Remove("disabled");
 	}
 
-	if (AsClose)
+	if (AsClose || AsAlertClose)
 	{
 		AdditionalAttributes.Remove("type");
 		AdditionalAttributes.Remove("aria-label");
@@ -34,6 +35,17 @@
 		AdditionalAttributes.Remove("type");
 		AdditionalAttributes.Remove("aria-label");
 	}
+
+	if (AsAlertClose)
+	{
+		AdditionalAttributes.Remove("data-bs-dismiss");
+		AdditionalAttributes.Add("data-bs-dismiss", "alert");
+	}
+	else
+	{
+		AdditionalAttributes.Remove("data-bs-dismiss");
+	}
+
 }
 
 @if (_style.Length > 0)

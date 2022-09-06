@@ -4,6 +4,10 @@
 	string _class = string.Concat("badge ",
 								GenerateFunctions.GenerateBackgroundColor(BackgroundColor),
 								GenerateFunctions.GenerateContrastColor(ContrastColor),
-								GenerateFunctions.GeneratePosition(Position)).Trim();
+								GenerateFunctions.GeneratePosition(Position),
+								GenerateFunctions.GenerateBorder(Border),
+								GenerateFunctions.GenerateBorderColor(BorderColor),
+								GenerateFunctions.GenerateTextColor(TextColor),
+								Class).Trim();
 }
 <span class=@_class @onclick=@OnClickHandler>@ChildContent</span> 

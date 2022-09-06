@@ -10,10 +10,11 @@ namespace BlazorBootstrapComponents.Components;
 public partial class BSButton
 {
 	[Parameter] public ButtonBackgroundEnum BackgroundColor { get; set; } = ButtonBackgroundEnum.Light;
+	[Parameter] public string Class { get; set; } = string.Empty;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public bool DisableTextWrapping { get; set; }
 	[Parameter] public ButtonOutlineColorEnum OutlineColor { get; set; } = ButtonOutlineColorEnum.Empty;
-	[Parameter] public ButtonSizeEnum Size { get; set; } = ButtonSizeEnum.Standard;
+	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
 	[Parameter] public string Width { get; set; } = string.Empty;
 	[Parameter] public string Height { get; set; } = string.Empty;
 	[Parameter] public bool Bold { get; set; }
@@ -30,6 +31,15 @@ public partial class BSButton
 		get { return _asClose; }
 		set { _asClose = value; }
 	}
+
+	private bool _asAlertClose;
+	[Parameter]
+	public bool AsAlertClose
+	{
+		get { return _asAlertClose; }
+		set { _asAlertClose = value; }
+	}
+
 
 	[Parameter]
 	public bool Disabled
@@ -76,9 +86,9 @@ public partial class BSButton
 	{
 		return Size switch
 		{
-			ButtonSizeEnum.Standard => "",
-			ButtonSizeEnum.Large => "btn-lg ",
-			ButtonSizeEnum.Small => "btn-sm ",
+			ControlSizeEnum.Standard => "",
+			ControlSizeEnum.Large => "btn-lg ",
+			ControlSizeEnum.Small => "btn-sm ",
 			_ => "",
 		};
 	}
