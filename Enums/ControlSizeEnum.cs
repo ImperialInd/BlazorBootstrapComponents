@@ -1,6 +1,6 @@
 ﻿namespace BlazorBootstrapComponents.Enums;
 
-public enum ButtonSizeEnum
+public enum ControlSizeEnum
 {
 	Standard,
 	Large,

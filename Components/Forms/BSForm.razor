@@ -4,34 +4,30 @@
 @if (OnSubmitCallback.HasDelegate)
 {
 	<EditForm Model=@Model OnSubmit=@OnSubmitHandler>
-		<div class="container-fluid">
-			@if (ShowValidation)
-			{
-				<DataAnnotationsValidator />
-			}
-			@if (ShowValidationSummary)
-			{
-				<ValidationSummary />
-			}
-			@ChildContent(Model)
-			<input type="submit" class="btn btn-primary" value="Save" />
-		</div>
+		@if (DataAnnotationsValidator)
+		{
+			<DataAnnotationsValidator />
+		}
+		@if (ValidationSummary)
+		{
+			<ValidationSummary />
+		}
+		@ChildContent(Model)
+		<input type="submit" class="btn btn-primary" value="Submit" style="width: 125px;">
 	</EditForm>
 }
 else
 {
 	<EditForm Model=@Model OnInvalidSubmit=@OnInvalidSubmitHandler OnValidSubmit=@OnValidSubmitHandler>
-		<div class="container-fluid">
-			@if (ShowValidation)
-			{
-				<DataAnnotationsValidator />
-			}
-			@if (ShowValidationSummary)
-			{
-				<ValidationSummary />
-			}
-			@ChildContent(Model)
-			<input type="submit" class="btn btn-primary" value="Save" />
-		</div>
+		@if (DataAnnotationsValidator)
+		{
+			<DataAnnotationsValidator />
+		}
+		@if (ValidationSummary)
+		{
+			<ValidationSummary />
+		}
+		@ChildContent(Model)
+		<input type="submit" class="btn btn-primary" value="Submit" style="width: 125px;">
 	</EditForm>
 }

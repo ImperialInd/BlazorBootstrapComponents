@@ -27,7 +27,7 @@ public partial class BSColumnFormLabel
 	[Parameter] public string For { get; set; } = string.Empty;
 	[Parameter] public FontSizeEnum FontSize { get; set; } = FontSizeEnum.Empty;
 	[Parameter] public TextColorEnum Color { get; set; } = TextColorEnum.Empty;
-	[Parameter] public FormControlSizeEnum Size { get; set; } = FormControlSizeEnum.Standard;
+	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public int[] MediaWidth { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
 

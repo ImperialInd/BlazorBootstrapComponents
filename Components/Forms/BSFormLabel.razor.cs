@@ -24,7 +24,7 @@ public partial class BSFormLabel
     [Parameter] public bool Bold { get; set; }
     [Parameter] public string For { get; set; } = string.Empty;
     [Parameter] public FontSizeEnum FontSize { get; set; } = FontSizeEnum.Empty;
-	[Parameter] public FormControlSizeEnum Size { get; set; } = FormControlSizeEnum.Standard;
+	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
 	[Parameter] public TextColorEnum Color { get; set; } = TextColorEnum.Empty;
     [Parameter] public RenderFragment ChildContent { get; set; }
 
