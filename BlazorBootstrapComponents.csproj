@@ -19,4 +19,10 @@
     <ProjectReference Include="..\Library\BaseClassLibrary\BaseClassLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Components\BSLabel.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

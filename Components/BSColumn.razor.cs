@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorBootstrapComponents.Components.Forms;
+namespace BlazorBootstrapComponents.Components;
 
-public partial class BSFormColumn
+public partial class BSColumn
 {
 	[Parameter] public string Class { get; set; } = String.Empty;
 	[Parameter] public int[] MediaOffset { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };

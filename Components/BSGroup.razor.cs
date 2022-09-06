@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorBootstrapComponents.Components.Forms;
+namespace BlazorBootstrapComponents.Components;
 
-public partial class BSFormGroup
+public partial class BSGroup
 {
 	[Parameter] public string Title { get; set; } = string.Empty;
 	[Parameter] public TextColorEnum TitleColor { get; set; } = TextColorEnum.Empty;

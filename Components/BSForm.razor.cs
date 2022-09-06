@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace BlazorBootstrapComponents.Components.Forms;
+namespace BlazorBootstrapComponents.Components;
 
 public partial class BSForm<TModel>
 {

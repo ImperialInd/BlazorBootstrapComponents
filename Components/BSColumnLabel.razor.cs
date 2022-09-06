@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorBootstrapComponents.Components.Forms;
+namespace BlazorBootstrapComponents.Components;
 
-public partial class BSColumnFormLabel
+public partial class BSColumnLabel
 {
 	protected override void OnInitialized()
 	{

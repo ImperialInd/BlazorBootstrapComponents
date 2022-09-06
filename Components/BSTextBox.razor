@@ -18,7 +18,7 @@
 @if (HorizontalLayout)
 {
 	<div class="row">
-		<BSColumnFormLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnFormLabel>
+		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
 			<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 		</div>
@@ -30,14 +30,14 @@ else
 	{
 		<div class="form-floating">
 			<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
-			<BSFormLabel For=@Id>@Title</BSFormLabel>
+			<BSLabel For=@Id>@Title</BSLabel>
 		</div>
 	}
 	else
 	{
 		@if (Title != null)
 		{
-			<BSFormLabel For=@Id>@Title</BSFormLabel>
+			<BSLabel For=@Id>@Title</BSLabel>
 		}
 		<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 	}

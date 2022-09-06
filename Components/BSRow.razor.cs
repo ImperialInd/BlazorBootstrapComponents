@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorBootstrapComponents.Components.Forms;
+namespace BlazorBootstrapComponents.Components;
 
-public partial class BSFormRow
+public partial class BSRow
 {
 
 	[Parameter] public string Class { get; set; }
