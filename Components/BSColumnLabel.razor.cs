@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorBootstrapComponents.Components.Forms;
+namespace BlazorBootstrapComponents.Components;
 
 public partial class BSColumnLabel
 {
