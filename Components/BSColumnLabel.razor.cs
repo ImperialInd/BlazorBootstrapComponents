@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorBootstrapComponents.Components.Forms;
 
-public partial class BSColumnFormLabel
+public partial class BSColumnLabel
 {
 	protected override void OnInitialized()
 	{

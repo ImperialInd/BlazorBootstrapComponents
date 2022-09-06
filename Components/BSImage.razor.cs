@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorBootstrapComponents.Components;
 
-public partial class IIImages
+public partial class BSImage
 {
 	protected override void OnInitialized()
 	{

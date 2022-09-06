@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazorBootstrapComponents.Components.Forms;
 
-public partial class BSFormRow
+public partial class BSRow
 {
 
 	[Parameter] public string Class { get; set; }
