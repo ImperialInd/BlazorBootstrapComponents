@@ -18,6 +18,8 @@ public partial class BSGroup
 	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public ShadowEnum Shadow { get; set; } = ShadowEnum.None;
+	[Parameter] public int Gap { get; set; } = 1;
+
 
 	public string Id { get; set; } = Guid.NewGuid().ToString();
 }
