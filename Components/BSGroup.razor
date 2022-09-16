@@ -1,8 +1,11 @@
-﻿@{
-	string _class = string.Concat($"card w-100 d-grid gap-{Gap.ToString()}",
+﻿@using BlazorBootstrapComponents.Enums
+@{
+	string _class = string.Concat($"gap-{Gap.ToString()} p-2 rounded rounded-2",
 						GenerateFunctions.GenerateBorderColor(BorderColor),
+						GenerateFunctions.GenerateBorder(Border),
 						GenerateFunctions.GenerateBackgroundColor(Background),
-						GenerateFunctions.GenerateShadow(Shadow)).Trim();
+						GenerateFunctions.GenerateShadow(Shadow),
+						GenerateFunctions.GenerateBorderWidth(BorderWidth)).Trim();
 	string _titleClass = string.Concat("fw-bold bg-transparent mb-0 ",
 								GenerateFunctions.GenerateTextColor(TitleColor),
 								GenerateFunctions.GenerateFontSize(TitleSize)).Trim();
@@ -14,9 +17,25 @@
 	{
 		<label for=@Id class="@_titleClass">@Title</label>
 	}
-	<div id=@Id class="@_class ">
-		<div class="card-body">
+	<div id=@Id class="w-100 d-grid @_class ">
 			@ChildContent
-		</div>
 	</div>
 </div>
+
+@code{
+	[Parameter] public string Class { get; set; } = string.Empty;
+	[Parameter] public string Title { get; set; } = string.Empty;
+	[Parameter] public TextColorEnum TitleColor { get; set; } = TextColorEnum.Empty;
+	[Parameter] public FontSizeEnum TitleSize { get; set; } = FontSizeEnum.Empty;
+	[Parameter] public BorderEnum Border { get; set; } = BorderEnum.ShowAll;
+	[Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Secondary;
+	[Parameter] public BorderWidthEnum BorderWidth { get; set; } = BorderWidthEnum.B1;
+	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public ShadowEnum Shadow { get; set; } = ShadowEnum.None;
+	[Parameter] public int Gap { get; set; } = 1;
+
+
+	public string Id { get; set; } = Guid.NewGuid().ToString();
+
+}
