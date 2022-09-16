@@ -18,6 +18,7 @@ public partial class BSColumn
 	[Parameter] public int[] MediaOrder { get; set; } = new int[] { -2, -2, -2, -2, -2, -2 };
 	[Parameter] public ColumnVerticalAlignmentEnum VerticalAlignment { get; set; } = ColumnVerticalAlignmentEnum.Empty;
 	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public int Gap { get; set; } = 1;
 
 
 	/// <summary>
