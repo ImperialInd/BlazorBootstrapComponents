@@ -24,7 +24,7 @@
 }
 @if (HorizontalLayout)
 {
-	<div class="row">
+	<div class="row @Class">
 		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
 		@{
 			string horizontalClass = GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox);
