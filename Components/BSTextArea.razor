@@ -24,7 +24,7 @@
 }
 @if (HorizontalLayout)
 {
-	<div class="row">
+	<div class="row @Class">
 		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
 		@{
 			string horizontalClass = GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox);
@@ -46,9 +46,37 @@ else
 {
 	@if (FloatingLabel)
 	{
-		<div class="form-floating">
+		@if (Value != null && Value.Length > 0)
+		{
+			<div class="form-floating @Class">
+				<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+				<BSLabel For=@Id>@Title</BSLabel>
+				@if (FeedbackInValid != null)
+				{
+					<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
+				}
+				@if (FeedbackValid != null)
+				{
+					<div id=@FeedbackId class="valid-feedback">@FeedbackValid</div>
+				}
+			</div>
+		}
+		else
+		{
+			<div class="@Class">
+				<textarea class=@_class id=@Id value=@Value placeholder=@Title @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+			</div>
+		}
+
+	}
+	else
+	{
+		<div class="@Class">
+			@if (Title != null)
+			{
+				<BSLabel Class=@Class For=@Id>@Title</BSLabel>
+			}
 			<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
-			<BSLabel For=@Id>@Title</BSLabel>
 			@if (FeedbackInValid != null)
 			{
 				<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
@@ -58,21 +86,5 @@ else
 				<div id=@FeedbackId class="valid-feedback">@FeedbackValid</div>
 			}
 		</div>
-	}
-	else
-	{
-		@if (Title != null)
-		{
-			<BSLabel For=@Id>@Title</BSLabel>
-		}
-		<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
-		@if (FeedbackInValid != null)
-		{
-			<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
-		}
-		@if (FeedbackValid != null)
-		{
-			<div id=@FeedbackId class="valid-feedback">@FeedbackValid</div>
-		}
 	}
 }

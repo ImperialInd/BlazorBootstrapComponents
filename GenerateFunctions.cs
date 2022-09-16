@@ -19,6 +19,18 @@ public static class GenerateFunctions
 		};
 	}
 
+	public static string GenerateShadow(ShadowEnum Shadow)
+	{
+		return Shadow switch
+		{
+			ShadowEnum.None => "",
+			ShadowEnum.Small => "shadow-sm ",
+			ShadowEnum.Regular => "shadow ",
+			ShadowEnum.Large => "shadow-lg ",
+			_ => ""
+		};
+	}
+
 	public static string GenerateContrastColor(ContrastColorEnum Color)
 	{
 		return Color switch

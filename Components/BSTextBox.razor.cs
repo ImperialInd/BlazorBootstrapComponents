@@ -17,6 +17,9 @@ public partial class BSTextBox
 		base.OnInitialized();
 	}
 
+	[Parameter] public bool Disabled { get; set; }
+	[Parameter] public bool ReadOnly { get; set; }
+	[Parameter] public string Class { get; set; } = string.Empty;
 	[Parameter] public string Value { get; set; }
 	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
@@ -32,4 +35,5 @@ public partial class BSTextBox
 
 	public string FeedbackId { get; set; } = string.Empty;
 	private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+
 }

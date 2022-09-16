@@ -22,7 +22,8 @@ public partial class BSLabel
         base.OnInitialized();
     }
 
-    [Parameter] public bool Bold { get; set; }
+	[Parameter] public string Class { get; set; } = string.Empty;
+	[Parameter] public bool Bold { get; set; }
     [Parameter] public bool IsFormLabel { get; set; }
     [Parameter] public string For { get; set; } = string.Empty;
     [Parameter] public FontSizeEnum FontSize { get; set; } = FontSizeEnum.Empty;
