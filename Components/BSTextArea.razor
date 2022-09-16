@@ -30,7 +30,7 @@
 			string horizontalClass = GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox);
 		}
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
 			@if (FeedbackInValid != null)
 			{
 				<div id=@FeedbackId class="@horizontalClass invalid-feedback">@FeedbackInValid</div>
@@ -46,37 +46,9 @@ else
 {
 	@if (FloatingLabel)
 	{
-		@if (Value != null && Value.Length > 0)
-		{
-			<div class="form-floating @Class">
-				<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
-				<BSLabel For=@Id>@Title</BSLabel>
-				@if (FeedbackInValid != null)
-				{
-					<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
-				}
-				@if (FeedbackValid != null)
-				{
-					<div id=@FeedbackId class="valid-feedback">@FeedbackValid</div>
-				}
-			</div>
-		}
-		else
-		{
-			<div class="@Class">
-				<textarea class=@_class id=@Id value=@Value placeholder=@Title @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
-			</div>
-		}
-
-	}
-	else
-	{
-		<div class="@Class">
-			@if (Title != null)
-			{
-				<BSLabel Class=@Class For=@Id>@Title</BSLabel>
-			}
-			<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+		<div class="form-floating">
+			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
+			<BSLabel For=@Id>@Title</BSLabel>
 			@if (FeedbackInValid != null)
 			{
 				<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
@@ -86,5 +58,21 @@ else
 				<div id=@FeedbackId class="valid-feedback">@FeedbackValid</div>
 			}
 		</div>
+	}
+	else
+	{
+		@if (Title != null)
+		{
+			<BSLabel For=@Id>@Title</BSLabel>
+		}
+		<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
+		@if (FeedbackInValid != null)
+		{
+			<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
+		}
+		@if (FeedbackValid != null)
+		{
+			<div id=@FeedbackId class="valid-feedback">@FeedbackValid</div>
+		}
 	}
 }

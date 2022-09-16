@@ -1,0 +1,86 @@
+﻿@typeparam TValue
+@using BlazorBootstrapComponents.Enums
+@using Microsoft.AspNetCore.Components.Forms
+
+
+@{
+	string _class = string.Concat("form-control ",
+							GenerateFunctions.GenerateBackgroundColor(Background),
+							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
+
+	AdditionalAttributes.Remove("autocomplete");
+	if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
+	else { AdditionalAttributes.Add("autocomplete", "off"); }
+
+	AdditionalAttributes.Remove("placeholder");
+	if (PlaceHolder.Length > 0) { AdditionalAttributes.Add("placeholder", PlaceHolder); }
+
+}
+@if (HorizontalLayout)
+{
+	<BSRow>
+		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
+		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
+			<InputNumber class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputNumber>
+		</div>
+	</BSRow>
+}
+else
+{
+	@if (FloatingLabel)
+	{
+		<div class="form-floating">
+			<InputNumber class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputNumber>
+			<BSLabel For=@Id>@Title</BSLabel>
+		</div>
+	}
+	else
+	{
+		@if (Title != null)
+		{
+			<BSLabel For=@Id>@Title</BSLabel>
+		}
+		<InputNumber class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputNumber>
+	}
+}
+
+
+
+@code{
+	protected override void OnInitialized()
+	{
+		if (Id == null || Id == string.Empty) Id = Guid.NewGuid().ToString();
+		base.OnInitialized();
+	}
+
+	private TValue _value;
+
+	[Parameter]
+	public TValue Value
+	{
+		get => _value;
+		set
+		{
+			if ((_value == null && value == null) || _value.Equals(value)) return;
+			_value = value;
+			ValueChanged.InvokeAsync(value);
+		}
+	}
+
+	[Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
+	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
+	[Parameter] public string Title { get; set; } = string.Empty;
+	[Parameter] public string Id { get; set; }
+	[Parameter] public bool FloatingLabel { get; set; }
+	[Parameter] public string PlaceHolder { get; set; } = string.Empty;
+	[Parameter] public bool AutoComplete { get; set; }
+	[Parameter] public bool HorizontalLayout { get; set; }
+	[Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+	[Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+	[Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty };
+
+	public string FeedbackId { get; set; } = string.Empty;
+	private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+
+}

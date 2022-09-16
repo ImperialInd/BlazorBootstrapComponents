@@ -16,8 +16,20 @@ public partial class BSTextArea
 		if (FeedbackInValid.Length > 0 || FeedbackValid.Length > 0) FeedbackId = Guid.NewGuid().ToString();
 		base.OnInitialized();
 	}
-	[Parameter] public string Class { get; set; } = string.Empty;
-	[Parameter] public string Value { get; set; }
+[Parameter] public string Class { get; set; } = string.Empty;
+	private string _Value;
+
+	[Parameter]
+	public string Value
+	{
+		get => _Value;
+		set
+		{
+			if (_Value == value) return;
+			_Value = value;
+			ValueChanged.InvokeAsync(value);
+		}
+	}
 	[Parameter] public EventCallback<string> ValueChanged { get; set; }
 	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
