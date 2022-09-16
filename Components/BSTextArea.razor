@@ -30,7 +30,7 @@
 			string horizontalClass = GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox);
 		}
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
 			@if (FeedbackInValid != null)
 			{
 				<div id=@FeedbackId class="@horizontalClass invalid-feedback">@FeedbackInValid</div>
@@ -47,7 +47,7 @@ else
 	@if (FloatingLabel)
 	{
 		<div class="form-floating">
-			<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
 			<BSLabel For=@Id>@Title</BSLabel>
 			@if (FeedbackInValid != null)
 			{
@@ -65,7 +65,7 @@ else
 		{
 			<BSLabel For=@Id>@Title</BSLabel>
 		}
-		<textarea class=@_class id=@Id value=@Value @onchange=@ValueChangedHandler @attributes=@AdditionalAttributes rows=@Rows></textarea>
+		<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
 		@if (FeedbackInValid != null)
 		{
 			<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>
