@@ -238,4 +238,29 @@ public static class GenerateFunctions
 		};
 	}
 
+	public static string GenerateBorderWidth(BorderWidthEnum Width)
+	{
+		return Width switch
+		{
+			BorderWidthEnum.B0 => "",
+			BorderWidthEnum.B1 => "border-1 ",
+			BorderWidthEnum.B2 => "border-2 ",
+			BorderWidthEnum.B3 => "border-3 ",
+			BorderWidthEnum.B4 => "border-4 ",
+			BorderWidthEnum.B5 => "border-5 ",
+			_ => ""
+		};
+	}
+
+	public static string GenerateRowVerticalAlignment(RowVerticalAlignmentEnum Value)
+	{
+		return Value switch
+		{
+			RowVerticalAlignmentEnum.Empty => "",
+			RowVerticalAlignmentEnum.Start => "align-items-start ",
+			RowVerticalAlignmentEnum.Center => "align-items-center ",
+			RowVerticalAlignmentEnum.End => "align-items-end ",
+			_ => ""
+		};
+	}
 }

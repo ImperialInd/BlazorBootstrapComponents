@@ -1,5 +1,9 @@
-﻿@{
-	string _class = string.Concat("row ", Class).Trim();
+﻿@using BlazorBootstrapComponents.Enums
+
+@{
+	string _class = string.Concat("row ", 
+							Class,
+							GenerateFunctions.GenerateRowVerticalAlignment(VerticalAlign)).Trim();
 }
 
 @if (RowTemplate == null)
@@ -11,4 +15,12 @@
 else
 {
 	@RowTemplate
+}
+
+@code{
+	[Parameter] public string Class { get; set; }
+	[Parameter] public RowVerticalAlignmentEnum VerticalAlign { get; set; } = RowVerticalAlignmentEnum.Start;
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public RenderFragment RowTemplate { get; set; }
+
 }
