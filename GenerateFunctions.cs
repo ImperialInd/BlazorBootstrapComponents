@@ -223,4 +223,19 @@ public static class GenerateFunctions
 		};
 	}
 
+	public static string GenerateVerticalAlignment(VerticalAlignmentEnum VA)
+	{
+		return VA switch
+		{
+			VerticalAlignmentEnum.Empty => "",
+			VerticalAlignmentEnum.Baseline => "align-baseline ",
+			VerticalAlignmentEnum.Top => "align-top ",
+			VerticalAlignmentEnum.Middle => "align-middle ",
+			VerticalAlignmentEnum.Bottom => "align-bottom ",
+			VerticalAlignmentEnum.TextTop => "align-text-top ",
+			VerticalAlignmentEnum.TextBottom => "align-text-bottom ",
+			_ => "",
+		};
+	}
+
 }
