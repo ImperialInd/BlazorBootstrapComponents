@@ -1,5 +1,5 @@
 ﻿@{
-	string _class = string.Concat("card w-100 mb-3 ",
+	string _class = string.Concat($"card w-100 d-grid gap-{Gap.ToString()}",
 						GenerateFunctions.GenerateBorderColor(BorderColor),
 						GenerateFunctions.GenerateBackgroundColor(Background),
 						GenerateFunctions.GenerateShadow(Shadow)).Trim();
