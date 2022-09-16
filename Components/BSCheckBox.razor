@@ -1,0 +1,69 @@
+﻿@using BlazorBootstrapComponents.Enums
+@using Microsoft.AspNetCore.Components.Forms
+@using System.Drawing
+
+@{
+    string _class = string.Concat("form-check-input ",
+                                GenerateFunctions.GenerateBorderColor(BorderColor)).Trim();
+    string _titleClass = string.Concat(GenerateFunctions.GenerateVerticalAlignment(VerticalAlign)).Trim();
+
+    @if (Disabled)
+    {
+        if (AdditionalAttributes.ContainsKey("disabled") == false) AdditionalAttributes.Add("disabled", true);
+    }
+    else
+    {
+        if (AdditionalAttributes.ContainsKey("disabled")) AdditionalAttributes.Remove("disabled");
+    }
+}
+
+<div class="form-check">
+    <InputCheckbox class=@_class @bind-Value=@Value id=@Id @attributes=@AdditionalAttributes />
+    @if (TitleTemplate != null)
+    {
+        <BSLabel Class="@_titleClass" For=@Id Bold=@Bold Color=@Color FontSize=@FontSize Size=@Size>@TitleTemplate</BSLabel>
+    }
+    else if(Title != null)
+    {
+        <BSLabel Class="@_titleClass" For=@Id Bold=@Bold Color=@Color FontSize=@FontSize Size=@Size>@Title</BSLabel>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        if (Id == null) Id = Guid.NewGuid().ToString();
+
+        base.OnInitialized();
+    }
+
+    private bool _value;
+    [Parameter]
+    public bool Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    [Parameter] public EventCallback<bool> ValueChanged { get; set; }
+    [Parameter] public string Id { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public RenderFragment TitleTemplate { get; set; }
+    [Parameter] public bool InLine { get; set; }
+    [Parameter] public bool Bold { get; set; }
+    [Parameter] public TextColorEnum Color { get; set; } = TextColorEnum.Empty;
+    [Parameter] public TextColorEnum CheckColor { get; set; } = TextColorEnum.Empty;
+    [Parameter] public FontSizeEnum FontSize { get; set; } = FontSizeEnum.Empty;
+    [Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
+    [Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Empty;
+    [Parameter] public VerticalAlignmentEnum VerticalAlign { get; set; } = VerticalAlignmentEnum.Empty;
+    [Parameter] public bool Disabled { get; set; }
+
+    private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+
+}
