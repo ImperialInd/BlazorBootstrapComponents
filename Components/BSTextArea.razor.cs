@@ -16,6 +16,7 @@ public partial class BSTextArea
 		if (FeedbackInValid.Length > 0 || FeedbackValid.Length > 0) FeedbackId = Guid.NewGuid().ToString();
 		base.OnInitialized();
 	}
+[Parameter] public string Class { get; set; } = string.Empty;
 	private string _Value;
 
 	[Parameter]
