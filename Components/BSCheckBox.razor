@@ -17,7 +17,7 @@
     }
 }
 
-<div class="form-check">
+<div class="form-check @Class">
     <InputCheckbox class=@_class @bind-Value=@Value id=@Id @attributes=@AdditionalAttributes />
     @if (TitleTemplate != null)
     {
@@ -50,6 +50,7 @@
         }
     }
 
+    [Parameter] public string Class { get; set; } = string.Empty;
     [Parameter] public EventCallback<bool> ValueChanged { get; set; }
     [Parameter] public string Id { get; set; }
     [Parameter] public string Title { get; set; }

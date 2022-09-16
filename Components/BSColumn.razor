@@ -1,9 +1,10 @@
 ﻿@{
-	string _class = string.Concat(Class, (Class.Length > 0 ? " " : ""),
-									GenerateWidth(),
-									GenerateOffset(),
-									GenerateOrder(),
-									GenerateVerticalAlignment()).Trim();
+	string _class = string.Concat($"d-grid gap-{Gap.ToString()} "
+								Class, (Class.Length > 0 ? " " : ""),
+								GenerateWidth(),
+								GenerateOffset(),
+								GenerateOrder(),
+								GenerateVerticalAlignment()).Trim();
 	<div class="@_class">
 		@ChildContent
 	</div>
