@@ -31,6 +31,7 @@ public partial class BSTextBox
 		}
 	}
 
+	[Parameter] public string Class { get; set; } = string.Empty;
 	[Parameter] public EventCallback<string> ValueChanged { get; set; }
 	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
