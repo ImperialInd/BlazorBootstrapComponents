@@ -1,0 +1,141 @@
+﻿@using BlazorBootstrapComponents.Enums
+<span class="@Class @GetClass()" style="@GetStyle()" @onclick=@OnClickHandler>@ChildContent</span>
+
+@code{
+	[Parameter] public CursorTypeEnum Cursor { get; set; } = CursorTypeEnum.Auto;
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public EventCallback OnClick { get; set; }
+	[Parameter] public bool Underline { get; set; }
+	[Parameter] public string Class { get; set; } = string.Empty;
+
+	private async Task OnClickHandler()
+	{
+		await OnClick.InvokeAsync();
+	}
+
+	private string GetClass()
+	{
+		string output = string.Empty;
+
+		if (Underline) output += " text-decoration-underline";
+
+		return output;
+	}
+
+	private string GetStyle()
+	{
+		switch (Cursor)
+		{
+			case CursorTypeEnum.Alias:
+				return "cursor: alias;";
+
+			case CursorTypeEnum.Allscroll:
+				return "cursor: all-scroll;";
+
+			default:
+			case CursorTypeEnum.Auto:
+				return "cursor: auto;";
+
+			case CursorTypeEnum.Cell:
+				return "cursor: cell;";
+
+			case CursorTypeEnum.Contextmenu:
+				return "cursor: context-menu;";
+
+			case CursorTypeEnum.ColResize:
+				return "cursor: col-resize;";
+
+			case CursorTypeEnum.Copy:
+				return "cursor: copy;";
+
+			case CursorTypeEnum.Crosshair:
+				return "cursor: crosshair;";
+
+			case CursorTypeEnum.Default:
+				return "cursor: default;";
+
+			case CursorTypeEnum.EResize:
+				return "cursor: e-resize;";
+
+			case CursorTypeEnum.EwResize:
+				return "cursor: ew-resize;";
+
+			case CursorTypeEnum.Grab:
+				return "cursor: -webkit-grab; cursor: grab;";
+
+			case CursorTypeEnum.Grabbing:
+				return "cursor: -webkit-grabbing; cursor: grabbing;";
+
+			case CursorTypeEnum.Help:
+				return "cursor: help;";
+
+			case CursorTypeEnum.Move:
+				return "cursor: move;";
+
+			case CursorTypeEnum.NResize:
+				return "cursor: n-resize;";
+
+			case CursorTypeEnum.NeResize:
+				return "cursor: ne-resize;";
+
+			case CursorTypeEnum.NeSwResize:
+				return "cursor: nesw-resize;";
+
+			case CursorTypeEnum.NsResize:
+				return "cursor: ns-resize;";
+
+			case CursorTypeEnum.NwResize:
+				return "cursor: nw-resize;";
+
+			case CursorTypeEnum.NwSeResize:
+				return "cursor: nwse-resize;";
+
+			case CursorTypeEnum.Nodrop:
+				return "cursor: no-drop;";
+
+			case CursorTypeEnum.None:
+				return "cursor: none;";
+
+			case CursorTypeEnum.NotAllowed:
+				return "cursor: not-allowed;";
+
+			case CursorTypeEnum.Pointer:
+				return "cursor: pointer;";
+
+			case CursorTypeEnum.Progress:
+				return "cursor: progress;";
+
+			case CursorTypeEnum.RowResize:
+				return "cursor: row-resize;";
+
+			case CursorTypeEnum.SResize:
+				return "cursor: s-resize;";
+
+			case CursorTypeEnum.SeResize:
+				return "cursor: se-resize;";
+
+			case CursorTypeEnum.SwResize:
+				return "cursor: sw-resize;";
+
+			case CursorTypeEnum.Text:
+				return "cursor: text;";
+
+			case CursorTypeEnum.Url:
+				return "cursor: url(myBall.cur),auto;";
+
+			case CursorTypeEnum.WResize:
+				return "cursor: w-resize;";
+
+			case CursorTypeEnum.Wait:
+				return "cursor: wait;";
+
+			case CursorTypeEnum.ZoomIn:
+				return "cursor: zoom-in;";
+
+			case CursorTypeEnum.ZoomOut:
+				return "cursor: zoom-out;";
+
+		}
+	}
+
+}
