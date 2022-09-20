@@ -1,0 +1,49 @@
+﻿@using BlazorBootstrapComponents.Enums
+@using Dapper.Core.Supporting
+@using Microsoft.AspNetCore.Components.Forms
+
+@{
+    string _class = string.Concat("form-select ").Trim();
+
+}
+
+@if (FloatingLabel)
+{
+    <div class="form-floating @Class">
+        <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+            @if (DefaultLabel != null)
+            {
+                <option value="0">@DefaultLabel</option>
+            }
+            @foreach (var item in Data)
+            {
+                <option value=@item.Car.ToString()>@item.Cdr</option>
+            }
+        </InputSelect>
+        <BSLabel For=@Id>@Title</BSLabel>
+    </div>
+}
+else
+{
+    <div class=@Class>
+        @if (Title != null)
+        {
+            <BSLabel For=@Id>@Title</BSLabel>
+        }
+    </div>
+}
+
+
+@code {
+    [Parameter] public IEnumerable<Cons<int,string>> Data { get; set; }
+    [Parameter] public int Value { get; set; }
+    [Parameter] public string DefaultLabel { get; set; }
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string Id { get; set; }
+    [Parameter] public bool FloatingLabel { get; set; }
+
+    public Dictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
+}
