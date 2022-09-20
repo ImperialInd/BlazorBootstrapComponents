@@ -17,15 +17,15 @@
     }
 }
 
-<div class="form-check @Class">
+<div class="form-check @(InLine ? "form-check-inline " : "") @Class">
     <InputCheckbox class=@_class @bind-Value=@Value id=@Id @attributes=@AdditionalAttributes />
     @if (TitleTemplate != null)
     {
-        <BSLabel Class="@_titleClass" For=@Id Bold=@Bold Color=@Color FontSize=@FontSize Size=@Size>@TitleTemplate</BSLabel>
+        <BSCheckBoxLabel Class="@_titleClass" For=@Id Bold=@Bold Color=@Color FontSize=@FontSize Size=@Size>@TitleTemplate</BSCheckBoxLabel>
     }
     else if(Title != null)
     {
-        <BSLabel Class="@_titleClass" For=@Id Bold=@Bold Color=@Color FontSize=@FontSize Size=@Size>@Title</BSLabel>
+        <BSCheckBoxLabel Class="@_titleClass" For=@Id Bold=@Bold Color=@Color FontSize=@FontSize Size=@Size>@Title</BSCheckBoxLabel>
     }
 </div>
 
