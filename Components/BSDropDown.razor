@@ -2,9 +2,12 @@
 @using Dapper.Core.Supporting
 @using Microsoft.AspNetCore.Components.Forms
 
+@typeparam TValue
+
+@inherits InputSelect<TValue>
+
 @{
     string _class = string.Concat("form-select ").Trim();
-
 }
 
 @if (FloatingLabel)
@@ -13,11 +16,11 @@
         <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
             @if (DefaultLabel != null)
             {
-                <option value="0">@DefaultLabel</option>
+                <option value=0>@DefaultLabel</option>
             }
             @foreach (var item in Data)
             {
-                <option value=@item.Car.ToString()>@item.Cdr</option>
+                <option value=@item.Car>@item.Cdr</option>
             }
         </InputSelect>
         <BSLabel For=@Id>@Title</BSLabel>
@@ -30,20 +33,59 @@ else
         {
             <BSLabel For=@Id>@Title</BSLabel>
         }
+        <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+            @if (DefaultLabel != null)
+            {
+                <option value="0">@DefaultLabel</option>
+            }
+            @foreach (var item in Data)
+            {
+                <option value=@item.Car.ToString()>@item.Cdr</option>
+            }
+        </InputSelect>
     </div>
 }
 
 
 @code {
-    [Parameter] public IEnumerable<Cons<int,string>> Data { get; set; }
-    [Parameter] public int Value { get; set; }
+    [Parameter] public IEnumerable<Cons<int, string>> Data { get; set; }
     [Parameter] public string DefaultLabel { get; set; }
     [Parameter] public string Class { get; set; } = string.Empty;
-    [Parameter] public EventCallback<string> ValueChanged { get; set; }
     [Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string Id { get; set; }
     [Parameter] public bool FloatingLabel { get; set; }
 
     public Dictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
+
+    protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
+    {
+        if (typeof(TValue) == typeof(int))
+        {
+            if (int.TryParse(value, out var resultInt))
+            {
+                result = (TValue)(object)resultInt;
+                validationErrorMessage = null;
+                return true;
+            }
+            else
+            {
+                result = default;
+                validationErrorMessage = $"The selected value {value} is not a valid number";
+                return false;
+            }
+        }
+        else if (typeof(TValue) == typeof(string))
+        {
+            result = (TValue)(object)value;
+            validationErrorMessage = null;
+            return true;
+        }
+        else
+        {
+            result = default;
+            validationErrorMessage = $"The selected value {value} is not a valid number or string";
+            return false;
+        }
+    }
 }
