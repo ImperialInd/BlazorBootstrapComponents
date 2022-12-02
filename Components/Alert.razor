@@ -6,8 +6,11 @@
 	}
 	else
 	{
+		@if(HeaderText != null)
+		{
 		<h4 class="alert-heading">@HeaderText</h4>
 		<hr />
+		}
 	}
 
 	@if (BodyTemplate != null)
@@ -16,7 +19,10 @@
 	}
 	else
 	{
-		<p>@BodyText</p>
+		@if(BodyText != null)
+		{
+			<p>@BodyText</p>
+		}
 	}
 
 	@if (FooterTemplate != null)
@@ -26,8 +32,11 @@
 	}
 	else
 	{
-		<hr />
-		<p>@FooterText</p>
+		@if(FooterText != null)
+		{
+			<hr />
+			<p>@FooterText</p>
+		}
 	}
 </div>
 
