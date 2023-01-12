@@ -1,6 +1,7 @@
 ﻿@using BlazorBootstrapComponents.Enums
 @{
 	string _class = string.Concat($"gap-{Gap.ToString()} p-2 rounded rounded-2",
+						(Bold ? "fw-bold " : ""),
 						GenerateFunctions.GenerateBorderColor(BorderColor),
 						GenerateFunctions.GenerateBorder(Border),
 						GenerateFunctions.GenerateBackgroundColor(Background),
@@ -34,7 +35,7 @@
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public ShadowEnum Shadow { get; set; } = ShadowEnum.None;
 	[Parameter] public int Gap { get; set; } = 1;
-
+	[Parameter] public bool Bold { get; set; }
 
 	public string Id { get; set; } = Guid.NewGuid().ToString();
 
