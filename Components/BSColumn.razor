@@ -17,7 +17,7 @@
 	[Parameter] public int[] MediaWidth { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
 	[Parameter] public bool AutoSize { get; set; }
 	[Parameter] public int[] MediaOrder { get; set; } = new int[] { -2, -2, -2, -2, -2, -2 };
-	[Parameter] public ColumnVerticalAlignmentEnum VerticalAlignment { get; set; } = ColumnVerticalAlignmentEnum.Empty;
+	[Parameter] public ColumnVerticalAlignmentEnum VerticalAlignment { get; set; } = ColumnVerticalAlignmentEnum.Start;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public int Gap { get; set; } = 1;
 
