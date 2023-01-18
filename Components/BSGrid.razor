@@ -1,13 +1,13 @@
 ﻿@using BlazorBootstrapComponents.Enums
 
 @{
-	string _class = string.Concat($"row gy-{Gap}", 
+	string _class = string.Concat($"grid ", 
 							Class,
 							GenerateFunctions.GenerateRowVerticalAlignment(VerticalAlign)).Trim();
 }
 @if (RowTemplate == null)	
 {
-<div class="@_class">
+	<div class="@_class" style="@($"row-gap: {Gap};")">
 	@ChildContent
 </div>
 }
@@ -21,5 +21,5 @@ else
 	[Parameter] public RowVerticalAlignmentEnum VerticalAlign { get; set; } = RowVerticalAlignmentEnum.Start;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public RenderFragment RowTemplate { get; set; }
-	[Parameter] public int Gap { get; set; } = 3;
+	[Parameter] public string Gap { get; set; } = "10px";
 }
