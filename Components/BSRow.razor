@@ -1,7 +1,7 @@
 ﻿@using BlazorBootstrapComponents.Enums
 
 @{
-	string _class = string.Concat($"row gy-{Gap}", 
+	string _class = string.Concat($"row gy-{Gap} ", 
 							Class,
 							GenerateFunctions.GenerateRowVerticalAlignment(VerticalAlign)).Trim();
 }
