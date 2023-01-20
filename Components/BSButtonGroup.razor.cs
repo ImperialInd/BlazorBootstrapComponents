@@ -13,21 +13,7 @@ public partial class BSButtonGroup
 	[Parameter] public ButtonGroupSizeEnum Size { get; set; } = ButtonGroupSizeEnum.Standard;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public bool Vertical { get; set; }
-
-	[Parameter]
-	public bool Disabled
-	{
-		get
-		{
-			bool output = AllOtherAttributes.ContainsKey("disabled");
-			return output;
-		}
-		set
-		{
-			AllOtherAttributes.Remove("disabled");
-			AllOtherAttributes.Add("disabled", true);
-		}
-	}
+	[Parameter] public bool Disabled { get; set; }
 
 	[Parameter(CaptureUnmatchedValues = true)]
 	public Dictionary<string, object> AllOtherAttributes { get; set; } = new Dictionary<string, object>();

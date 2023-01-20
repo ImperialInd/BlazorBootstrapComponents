@@ -1,6 +1,16 @@
 ﻿@{
 	string _class = string.Concat((Vertical ? "btn-group-vertical " : "btn-group "),
 						GetButtonGroupSize()).Trim();
+
+	@if(Disabled)
+	{
+		AllOtherAttributes.Remove("disabled");
+		AllOtherAttributes.Add("disabled", true);
+	}
+	else
+	{
+		AllOtherAttributes.Remove("disabled");
+	}
 }
 
 
