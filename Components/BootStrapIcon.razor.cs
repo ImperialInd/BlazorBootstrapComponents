@@ -31,7 +31,7 @@ public partial class BootStrapIcon
 
 	private void OnClickHandler()
 	{
-		if(OnClick != null)	OnClick.Invoke();
+		OnClick?.Invoke();
 	}
 
 }
