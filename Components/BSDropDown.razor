@@ -3,58 +3,92 @@
 @using Microsoft.AspNetCore.Components.Forms
 
 @typeparam TValue
+@typeparam ListValue
 
 @inherits InputSelect<TValue>
 
 @{
-    string _class = string.Concat("form-select ").Trim();
+    string _class = string.Concat("form-select ",
+                            GenerateFunctions.GenerateBackgroundColor(Background),
+                            GenerateFunctions.GenerateFormSelectSize(Size)).Trim();
+    var typeObj = Data.First().GetType();
+    var textProp = typeObj.GetProperty(TextField);
+    var valueProp = typeObj.GetProperty(ValueField);
 }
 
-@if (FloatingLabel)
+@if (HorizontalLayout)
 {
-    <div class="form-floating @Class">
-        <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
-            @if (DefaultLabel != null)
-            {
-                <option value=0>@DefaultLabel</option>
-            }
-            @foreach (var item in Data)
-            {
-                <option value=@item.Car>@item.Cdr</option>
-            }
-        </InputSelect>
-        <BSLabel For=@Id>@Title</BSLabel>
-    </div>
+    <BSRow Class=@Class>
+        <BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
+        <div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
+            <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+                @if (DefaultLabel != null)
+                {
+                    <option value=0>@DefaultLabel</option>
+                }
+                @foreach (var item in Data)
+                {
+                    <option value=@valueProp.GetValue(item).ToString()>@textProp.GetValue(item).ToString()</option>
+                }
+            </InputSelect>
+        </div>
+    </BSRow>
 }
 else
 {
-    <div class=@Class>
-        @if (Title != null)
-        {
-            <BSLabel For=@Id>@Title</BSLabel>
-        }
-        <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
-            @if (DefaultLabel != null)
+    @if (FloatingLabel)
+    {
+        <div class="form-floating @Class">
+            <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+                @if (DefaultLabel != null)
+                {
+                    <option value=0>@DefaultLabel</option>
+                }
+                @foreach (var item in Data)
+                {
+                    <option value=@valueProp.GetValue(item).ToString()>@textProp.GetValue(item).ToString()</option>
+                }
+            </InputSelect>
+            <BSLabel Bold=true For=@Id>@Title</BSLabel>
+        </div>
+    }
+    else
+    {
+        <div class=@Class>
+            @if (Title != null)
             {
-                <option value="0">@DefaultLabel</option>
+                <BSLabel Bold=true For=@Id>@Title</BSLabel>
             }
-            @foreach (var item in Data)
-            {
-                <option value=@item.Car.ToString()>@item.Cdr</option>
-            }
-        </InputSelect>
-    </div>
+            <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+                @if (DefaultLabel != null)
+                {
+                    <option value="0">@DefaultLabel</option>
+                }
+
+                @foreach (var item in Data)
+                {
+                    <option value=@valueProp.GetValue(item).ToString()>@textProp.GetValue(item).ToString()</option>
+                }
+            </InputSelect>
+        </div>
+    }
 }
 
-
 @code {
-    [Parameter] public IEnumerable<Cons<int, string>> Data { get; set; }
+    [Parameter] public IEnumerable<ListValue> Data { get; set; }
     [Parameter] public string DefaultLabel { get; set; }
     [Parameter] public string Class { get; set; } = string.Empty;
     [Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string Id { get; set; }
     [Parameter] public bool FloatingLabel { get; set; }
+    [Parameter] public bool HorizontalLayout { get; set; }
+    [Parameter] public string TextField { get; set; }
+    [Parameter] public string ValueField { get; set; }
+    [Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
+    [Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+    [Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+    [Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty };
 
     public Dictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
 

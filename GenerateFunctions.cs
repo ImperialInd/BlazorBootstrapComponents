@@ -122,7 +122,7 @@ public static class GenerateFunctions
 		return output;
 	}
 
-	public static string GenerateTextAlignment(TextAlignmentEnum[] MediaAlignment)
+	public static string GenerateTextAlignmentClass(TextAlignmentEnum[] MediaAlignment)
 	{
 		string output = String.Empty;
 
@@ -209,6 +209,16 @@ public static class GenerateFunctions
 			ControlSizeEnum.Standard => "",
 			ControlSizeEnum.Large => "form-control-lg ",
 			ControlSizeEnum.Small => "form-control-sm ",
+			_ => "",
+		};
+	}
+	public static string GenerateFormSelectSize(ControlSizeEnum Size)
+	{
+		return Size switch
+		{
+			ControlSizeEnum.Standard => "",
+			ControlSizeEnum.Large => "form-select-lg ",
+			ControlSizeEnum.Small => "form-select-sm ",
 			_ => "",
 		};
 	}
