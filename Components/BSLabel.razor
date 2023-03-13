@@ -6,8 +6,14 @@
 								GenerateFunctions.GenerateFontSize(FontSize),
 								GenerateFunctions.GenerateTextColor(Color),
 								Class).Trim();
+
+	AdditionalAttributes.Remove("class");
+	AdditionalAttributes.Add("class", _class);
+
+	AdditionalAttributes.Remove("for");
+	if (For != null) AdditionalAttributes.Add("for", For);
 }
-<label class=@_class @attributes=@AdditionalAttributes>@ChildContent</label>
+<label @attributes=@AdditionalAttributes>@ChildContent</label>
 
 @code {
 	protected override void OnInitialized()

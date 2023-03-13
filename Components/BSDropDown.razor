@@ -8,12 +8,24 @@
 @inherits InputSelect<TValue>
 
 @{
+    object passedClass = null;
+    Attributes.TryGetValue("class", out passedClass);
     string _class = string.Concat("form-select ",
                             GenerateFunctions.GenerateBackgroundColor(Background),
-                            GenerateFunctions.GenerateFormSelectSize(Size)).Trim();
+                            GenerateFunctions.GenerateFormSelectSize(Size),
+                            passedClass != null ? passedClass.ToString() : "").Trim();
     var typeObj = Data.First().GetType();
     var textProp = typeObj.GetProperty(TextField);
     var valueProp = typeObj.GetProperty(ValueField);
+
+    Attributes.Remove("class");
+    Attributes.Add("class", _class);
+
+    Attributes.Remove("disabled");
+    if(Disabled) Attributes.Add("disable", true);
+
+    Attributes.Remove("id");
+    if (Id != null) Attributes.Add("id", Id);
 }
 
 @if (HorizontalLayout)
@@ -21,7 +33,7 @@
     <BSRow Class=@Class>
         <BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
         <div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-            <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+            <InputSelect @attributes=@Attributes Value=@Value ValueExpression=@ValueExpression ValueChanged=@ValueChanged>
                 @if (DefaultLabel != null)
                 {
                     <option value=0>@DefaultLabel</option>
@@ -39,7 +51,7 @@ else
     @if (FloatingLabel)
     {
         <div class="form-floating @Class">
-            <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+            <InputSelect @attributes=@Attributes Value=@Value ValueExpression=@ValueExpression ValueChanged=@ValueChanged>
                 @if (DefaultLabel != null)
                 {
                     <option value=0>@DefaultLabel</option>
@@ -59,7 +71,7 @@ else
             {
                 <BSLabel Bold=true For=@Id>@Title</BSLabel>
             }
-            <InputSelect id=@Id class="@_class" @attributes=@Attributes @bind-Value=@Value>
+            <InputSelect @attributes=@Attributes Value=@Value ValueExpression=@ValueExpression ValueChanged=@ValueChanged >
                 @if (DefaultLabel != null)
                 {
                     <option value="0">@DefaultLabel</option>
@@ -75,6 +87,9 @@ else
 }
 
 @code {
+
+    private const TextAlignmentEnum TAEmpty = TextAlignmentEnum.Empty;
+
     [Parameter] public IEnumerable<ListValue> Data { get; set; }
     [Parameter] public string DefaultLabel { get; set; }
     [Parameter] public string Class { get; set; } = string.Empty;
@@ -82,15 +97,19 @@ else
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string Id { get; set; }
     [Parameter] public bool FloatingLabel { get; set; }
+    [Parameter] public bool Disabled { get; set; }
     [Parameter] public bool HorizontalLayout { get; set; }
     [Parameter] public string TextField { get; set; }
     [Parameter] public string ValueField { get; set; }
     [Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
     [Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
     [Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
-    [Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty };
+    [Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TAEmpty, TAEmpty, TAEmpty, TAEmpty, TAEmpty, TAEmpty };
 
-    public Dictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
+    [Parameter] public Dictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();
+
+    [Parameter] public EventCallback<TValue> OnChange { get; set; }
+
 
     protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
     {

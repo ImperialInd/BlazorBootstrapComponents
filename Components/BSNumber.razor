@@ -1,91 +1,144 @@
 ﻿@typeparam TValue
+
 @using BlazorBootstrapComponents.Enums
 @using Microsoft.AspNetCore.Components.Forms
-
+@using System.Linq.Expressions
+@using BlazorBootstrapComponents.Extensions
+@using System.Reflection;
 
 @{
-	string _class = string.Concat("form-control ",
-							GenerateFunctions.GenerateBackgroundColor(Background),
-							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
+    string _class = string.Concat("form-control ",
+                            GenerateFunctions.GenerateBackgroundColor(Background),
+                            GenerateFunctions.GenerateFormControlSize(Size),
+                            Arrows ? "" : "noarrow ",
+                            _fieldCssClasses).Trim();
 
-	AdditionalAttributes.Remove("autocomplete");
-	if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
-	else { AdditionalAttributes.Add("autocomplete", "off"); }
+    AdditionalAttributes.Remove("class");
+    AdditionalAttributes.Add("class", _class);
 
-	AdditionalAttributes.Remove("placeholder");
-	if (PlaceHolder.Length > 0) { AdditionalAttributes.Add("placeholder", PlaceHolder); }
+    AdditionalAttributes.Remove("step");
+    AdditionalAttributes.Add("step", "any");
+
+    AdditionalAttributes.Remove("id");
+    if (Id != null) { AdditionalAttributes.Add("id", Id); }
+
+    AdditionalAttributes.Remove("autocomplete");
+    if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
+    else { AdditionalAttributes.Add("autocomplete", "off"); }
+
+    AdditionalAttributes.Remove("disabled");
+    if (Disabled) { AdditionalAttributes.Add("disabled", true); }
+
+    AdditionalAttributes.Remove("readonly");
+    if (ReadOnly) { AdditionalAttributes.Add("readonly", true); }
+
+    AdditionalAttributes.Remove("required");
+    if (Required) { AdditionalAttributes.Add("required", true); }
+
+    AdditionalAttributes.Remove("placeholder");
+    if (PlaceHolder.Length > 0) { AdditionalAttributes.Add("placeholder", PlaceHolder); }
 
 }
 @if (HorizontalLayout)
 {
-	<BSRow Class=@Class>
-		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
-		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<InputNumber id=@Id class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputNumber>
-		</div>
-	</BSRow>
+    <BSRow Class=@Class>
+        <BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
+        <div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
+            <input type="number" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+        </div>
+    </BSRow>
 }
 else
 {
-	@if (FloatingLabel)
-	{
-		<div class="form-floating @Class">
-			<InputNumber id=@Id class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputNumber>
-			<BSLabel Bold=true For=@Id>@Title</BSLabel>
-		</div>
-	}
-	else
-	{
-		<div class=@Class>
-			@if (Title != null)
-			{
-				<BSLabel Bold=true For=@Id>@Title</BSLabel>
-			}
-			<InputNumber id=@Id class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputNumber>
-		</div>
-	}
+    @if (FloatingLabel)
+    {
+        <div class="form-floating @Class">
+            <input type="number" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+            <BSLabel Bold=true For=@Id>@Title</BSLabel>
+        </div>
+    }
+    else
+    {
+        <div class=@Class>
+            @if (Title != null)
+            {
+                <BSLabel Bold=true For=@Id>@Title</BSLabel>
+            }
+            <input type="number" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+        </div>
+    }
 }
 
 
 
 @code {
-	protected override void OnInitialized()
-	{
-		if (Id == null || Id == string.Empty) Id = Guid.NewGuid().ToString();
-		base.OnInitialized();
-	}
+    protected override void OnInitialized()
+    {
+        _fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+        if (Id == null || Id == string.Empty) Id = Guid.NewGuid().ToString();
+        base.OnInitialized();
+    }
 
-	private TValue _value;
+    private FieldIdentifier _fieldIdentifier;
+    private string _fieldCssClasses => CascadedEditContext?.FieldCssClass(_fieldIdentifier) ?? "";
 
-	[Parameter]
-	public TValue Value
-	{
-		get => _value;
-		set
-		{
-			if ((_value == null && value == null) || _value.Equals(value)) return;
-			_value = value;
-			ValueChanged.InvokeAsync(value);
-			OnChange.InvokeAsync(value);
-		}
-	}
+    [CascadingParameter] private EditContext CascadedEditContext { get; set; }
 
-	[Parameter] public string Class { get; set; } = string.Empty;
-	[Parameter] public EventCallback<TValue> ValueChanged { get; set; }
-	[Parameter] public EventCallback<TValue> OnChange { get; set; }
-	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
-	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
-	[Parameter] public string Title { get; set; } = string.Empty;
-	[Parameter] public string Id { get; set; }
-	[Parameter] public bool FloatingLabel { get; set; }
-	[Parameter] public string PlaceHolder { get; set; } = string.Empty;
-	[Parameter] public bool AutoComplete { get; set; }
-	[Parameter] public bool HorizontalLayout { get; set; }
-	[Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
-	[Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
-	[Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty };
+    [Parameter] public TValue Value { get; set; }
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+    [Parameter] public Expression<Func<TValue>> ValueExpression { get; set; }
 
-	public string FeedbackId { get; set; } = string.Empty;
-	private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+    [Parameter] public EventCallback<TValue> OnChange { get; set; }
 
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public bool ReadOnly { get; set; }
+    [Parameter] public bool Required { get; set; }
+    [Parameter] public bool Arrows { get; set; }
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
+    [Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string Id { get; set; }
+    [Parameter] public bool FloatingLabel { get; set; }
+    [Parameter] public string PlaceHolder { get; set; } = string.Empty;
+    [Parameter] public bool AutoComplete { get; set; }
+    [Parameter] public bool HorizontalLayout { get; set; }
+    [Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+    [Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+    [Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty, TextAlignmentEnum.Empty };
+
+    public string FeedbackId { get; set; } = string.Empty;
+    private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+
+    private async Task OnChangeHandler(ChangeEventArgs args)
+    {
+        string input = (string)args.Value;
+        Type typeNullable = typeof(TValue);
+
+        if (typeNullable.Name == "Nullable`1")
+        {
+            if(input.Length == 0)
+            {
+                Value = default(TValue);
+                await ValueChanged.InvokeAsync(default(TValue));
+                await OnChange.InvokeAsync(default(TValue));
+                CascadedEditContext?.NotifyFieldChanged(_fieldIdentifier);
+            }
+            else
+            {
+                Type typeValue = Nullable.GetUnderlyingType(typeNullable);
+                TValue output = (TValue)Convert.ChangeType(input, typeValue);
+                await ValueChanged.InvokeAsync(output);
+                await OnChange.InvokeAsync(output);
+                CascadedEditContext?.NotifyFieldChanged(_fieldIdentifier);
+            }
+        }
+        else
+        {
+            TValue output = (TValue)Convert.ChangeType(input, typeNullable);
+            await ValueChanged.InvokeAsync(output);
+            await OnChange.InvokeAsync(output);
+            CascadedEditContext?.NotifyFieldChanged(_fieldIdentifier);
+        }
+    }
 }

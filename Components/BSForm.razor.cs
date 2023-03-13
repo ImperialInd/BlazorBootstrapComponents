@@ -20,6 +20,7 @@ public partial class BSForm<TModel>
 	[Parameter] public bool DataAnnotationsValidator { get; set; }
 	[Parameter] public bool ValidationSummary { get; set; }
 	[Parameter] public bool ShowValidationSummary { get; set; }
+	[Parameter] public string Gutter { get; set; } = string.Empty;
 
 	[Parameter] public EventCallback<EditContext> OnSubmitCallback { get; set; }
 	[Parameter] public EventCallback<EditContext> OnInvalidSubmitCallback { get; set; }

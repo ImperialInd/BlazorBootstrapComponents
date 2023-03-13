@@ -7,9 +7,15 @@
 							GenerateFunctions.GenerateBackgroundColor(Background),
 							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
 
+	AdditionalAttributes.Remove("class");
+	AdditionalAttributes.Add("class", _class);
+
 	AdditionalAttributes.Remove("autocomplete");
 	if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
 	else { AdditionalAttributes.Add("autocomplete", "off"); }
+
+	AdditionalAttributes.Remove("id");
+	if (Id.Length > 0) { AdditionalAttributes.Add("id", Id); }
 
 	AdditionalAttributes.Remove("placeholder");
 	if (PlaceHolder.Length > 0) { AdditionalAttributes.Add("placeholder", PlaceHolder); }
@@ -26,7 +32,7 @@
 	<div class="row @Class">
 		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
+			<InputText DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 		</div>
 	</div>
 }
@@ -37,7 +43,7 @@ else
 		@if(Value != null && Value.Length > 0)
 		{
 		<div class="form-floating @Class">
-			<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
+			<InputText DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 			<BSLabel For=@Id>@Title</BSLabel>
 		</div>
 		}
@@ -55,7 +61,7 @@ else
 		{
 			<BSLabel Class=@Class For=@Id>@Title</BSLabel>
 		}
-		<InputText class=@_class DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
+		<InputText DisplayName=@PlaceHolder @bind-Value=@Value></InputText>
 		</div>
 	}
 }
