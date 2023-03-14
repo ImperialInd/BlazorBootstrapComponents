@@ -13,9 +13,10 @@ public partial class BSIcon
 	[Parameter] public string Class { get; set; }
 	[Parameter] public string Id { get; set; }
 	[Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; }
 
 
-	private string GetIconClass()
+    private string GetIconClass()
 	{
 		string name = Icon.ToString();
 		string output = $"{name.Replace('_', '-')}";
@@ -23,10 +24,10 @@ public partial class BSIcon
 	}
 	private string GetIconColor()
 	{
-		return $"{this.Color.Name}";
-	}
+        return $"{ColorTranslator.ToHtml(this.Color)}";
+    }
 	private void OnClickHandler()
 	{
-		if (OnClick != null) OnClick.Invoke();
-	}
+        OnClick?.Invoke();
+    }
 }

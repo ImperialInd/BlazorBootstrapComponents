@@ -2,7 +2,7 @@
 	string _class = string.Concat("col-form-label ",
 								GenerateWidth(),
 								GenerateFunctions.GenerateFormLabelControlSize(Size),
-								GenerateFunctions.GenerateTextAlignment(MediaAlignment),
+								GenerateFunctions.GenerateTextAlignmentClass(MediaAlignment),
 								(Bold ? "fw-bold " : ""),
 								GenerateFunctions.GenerateFontSize(FontSize),
 								GenerateFunctions.GenerateTextColor(Color)).Trim();

@@ -1,167 +1,151 @@
 ﻿@using BlazorBootstrapComponents.Enums
 @{
-	string _class = string.Concat("btn ",
-						GetButtonBackgroundColor(),
-						(DisableTextWrapping ? "text-nowrap " : ""),
-						GetButtonOutlineColor(),
-						GetButtonSize(),
-						(Bold ? "fw-bold " : ""),
-						(AsClose ? "btn-close " : ""),
-						(Underline ? "text-decoration-underline " : ""),
-						Class).Trim();
+    string _class = string.Concat("btn ",
+                        GetButtonBackgroundColor(),
+                        (DisableTextWrapping ? "text-nowrap " : ""),
+                        GetButtonOutlineColor(),
+                        GetButtonSize(),
+                        (Bold ? "fw-bold " : ""),
+                        (AsClose ? "btn-close " : ""),
+                        (Underline ? "text-decoration-underline " : ""),
+                        Class).Trim();
 
-	string _style = string.Concat((Width.Length > 0 ? $"width: {Width}; " : ""),
-								(Height.Length > 0 ? $"height: {Height}; " : "")).Trim();
+    string _style = string.Concat((Width.Length > 0 ? $"width: {Width}; " : ""),
+                                (Height.Length > 0 ? $"height: {Height}; " : "")).Trim();
 
-	if (Disabled)
-	{
-		AdditionalAttributes.Remove("disabled");
-		AdditionalAttributes.Add("disabled", true);
-	}
-	else
-	{
-		AdditionalAttributes.Remove("disabled");
-	}
+    if (Disabled)
+    {
+        AdditionalAttributes.Remove("disabled");
+        AdditionalAttributes.Add("disabled", true);
+    }
+    else
+    {
+        AdditionalAttributes.Remove("disabled");
+    }
 
-	if (AsClose || AsAlertClose)
-	{
-		AdditionalAttributes.Remove("type");
-		AdditionalAttributes.Remove("aria-label");
-		AdditionalAttributes.Add("type", "button");
-		AdditionalAttributes.Add("aria-label", "Close");
-	}
-	else
-	{
-		AdditionalAttributes.Remove("type");
-		AdditionalAttributes.Remove("aria-label");
-	}
+    if (AsClose || AsAlertClose)
+    {
+        AdditionalAttributes.Remove("type");
+        AdditionalAttributes.Remove("aria-label");
+        AdditionalAttributes.Add("type", "button");
+        AdditionalAttributes.Add("aria-label", "Close");
+    }
+    else
+    {
+        AdditionalAttributes.Remove("type");
+        AdditionalAttributes.Remove("aria-label");
+    }
 
-	if (AsAlertClose)
-	{
-		AdditionalAttributes.Remove("data-bs-dismiss");
-		AdditionalAttributes.Add("data-bs-dismiss", "alert");
-	}
-	else
-	{
-		AdditionalAttributes.Remove("data-bs-dismiss");
-	}
+    if (AsAlertClose)
+    {
+        AdditionalAttributes.Remove("data-bs-dismiss");
+        AdditionalAttributes.Add("data-bs-dismiss", "alert");
+    }
+    else
+    {
+        AdditionalAttributes.Remove("data-bs-dismiss");
+    }
 
 }
 
 @if (_style.Length > 0)
 {
-	<button class=@_class style=@_style @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
-		@if (Icon != IconNamesEnum.Empty)
-		{
-			<BSIcon Icon=@Icon>&nbsp;</BSIcon>
-		}
-		@ChildContent
-	</button>
+    <button class=@_class style=@_style @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+        @if (Icon != IconNamesEnum.Empty)
+        {
+            <BSIcon Icon=@Icon>&nbsp;</BSIcon>
+        }
+        @ChildContent
+    </button>
 }
 else
 {
-	<button class=@_class @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
-		@if (Icon != IconNamesEnum.Empty)
-		{
-			<BSIcon Icon=@Icon>&nbsp;</BSIcon>
-		}
-		@ChildContent
-	</button>
+    <button class=@_class @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+        @if (Icon != IconNamesEnum.Empty)
+        {
+            <BSIcon Icon=@Icon>&nbsp;</BSIcon>
+        }
+        @ChildContent
+    </button>
 }
 
-@code{
-	[Parameter] public ButtonBackgroundEnum BackgroundColor { get; set; } = ButtonBackgroundEnum.Light;
-	[Parameter] public string Class { get; set; } = string.Empty;
-	[Parameter] public RenderFragment ChildContent { get; set; }
-	[Parameter] public bool DisableTextWrapping { get; set; }
-	[Parameter] public ButtonOutlineColorEnum BorderColor { get; set; } = ButtonOutlineColorEnum.Empty;
-	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
-	[Parameter] public string Width { get; set; } = string.Empty;
-	[Parameter] public string Height { get; set; } = string.Empty;
-	[Parameter] public bool Bold { get; set; }
-	[Parameter] public bool Underline { get; set; }
-	[Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
-	[Parameter] public EventCallback OnClick { get; set; }
-	[Parameter] public EventCallback OnDoubleClick { get; set; }
-	[Parameter] public IconNamesEnum Icon { get; set; } = IconNamesEnum.Empty;
+@code {
+    [Parameter] public ButtonBackgroundEnum BackgroundColor { get; set; } = ButtonBackgroundEnum.Light;
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public bool DisableTextWrapping { get; set; }
+    [Parameter] public ButtonOutlineColorEnum BorderColor { get; set; } = ButtonOutlineColorEnum.Empty;
+    [Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
+    [Parameter] public string Width { get; set; } = string.Empty;
+    [Parameter] public string Height { get; set; } = string.Empty;
+    [Parameter] public bool Bold { get; set; }
+    [Parameter] public bool Underline { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public EventCallback OnDoubleClick { get; set; }
+    [Parameter] public IconNamesEnum Icon { get; set; } = IconNamesEnum.Empty;
 
-	private bool _asClose;
-	[Parameter]
-	public bool AsClose
-	{
-		get { return _asClose; }
-		set { _asClose = value; }
-	}
+    private bool _asClose;
+    [Parameter] public bool AsClose { get { return _asClose; } set { _asClose = value; } }
 
-	private bool _asAlertClose;
-	[Parameter]
-	public bool AsAlertClose
-	{
-		get { return _asAlertClose; }
-		set { _asAlertClose = value; }
-	}
+    private bool _asAlertClose;
+    [Parameter] public bool AsAlertClose { get { return _asAlertClose; } set { _asAlertClose = value; } }
 
+    private bool _disabled;
+    [Parameter] public bool Disabled { get { return _disabled; } set { _disabled = value; } }
 
-	[Parameter]
-	public bool Disabled
-	{
-		get { return _disabled; }
-		set { _disabled = value; }
-	}
-	private bool _disabled;
+    private string GetButtonBackgroundColor()
+    {
+        return BackgroundColor switch
+        {
+            ButtonBackgroundEnum.Primary => "btn-primary ",
+            ButtonBackgroundEnum.Secondary => "btn-secondary ",
+            ButtonBackgroundEnum.Success => "btn-success ",
+            ButtonBackgroundEnum.Danger => "btn-danger ",
+            ButtonBackgroundEnum.Warning => "btn-warning ",
+            ButtonBackgroundEnum.Info => "btn-info ",
+            ButtonBackgroundEnum.Light => "btn-light ",
+            ButtonBackgroundEnum.Dark => "btn-dark ",
+            ButtonBackgroundEnum.Link => "btn-link ",
+            _ => "",
+        };
+    }
 
-	private string GetButtonBackgroundColor()
-	{
-		return BackgroundColor switch
-		{
-			ButtonBackgroundEnum.Primary => "btn-primary ",
-			ButtonBackgroundEnum.Secondary => "btn-secondary ",
-			ButtonBackgroundEnum.Success => "btn-success ",
-			ButtonBackgroundEnum.Danger => "btn-danger ",
-			ButtonBackgroundEnum.Warning => "btn-warning ",
-			ButtonBackgroundEnum.Info => "btn-info ",
-			ButtonBackgroundEnum.Light => "btn-light ",
-			ButtonBackgroundEnum.Dark => "btn-dark ",
-			ButtonBackgroundEnum.Link => "btn-link ",
-			_ => "",
-		};
-	}
+    private string GetButtonOutlineColor()
+    {
+        return BorderColor switch
+        {
+            ButtonOutlineColorEnum.Primary => "btn-outline-primary ",
+            ButtonOutlineColorEnum.Secondary => "btn-outline-secondary ",
+            ButtonOutlineColorEnum.Success => "btn-outline-success ",
+            ButtonOutlineColorEnum.Danger => "btn-outline-danger ",
+            ButtonOutlineColorEnum.Warning => "btn-outline-warning ",
+            ButtonOutlineColorEnum.Info => "btn-outline-info ",
+            ButtonOutlineColorEnum.Light => "btn-outline-light ",
+            ButtonOutlineColorEnum.Dark => "btn-outline-dark ",
+            _ => "",
+        };
+    }
 
-	private string GetButtonOutlineColor()
-	{
-		return BorderColor switch
-		{
-			ButtonOutlineColorEnum.Primary => "btn-outline-primary ",
-			ButtonOutlineColorEnum.Secondary => "btn-outline-secondary ",
-			ButtonOutlineColorEnum.Success => "btn-outline-success ",
-			ButtonOutlineColorEnum.Danger => "btn-outline-danger ",
-			ButtonOutlineColorEnum.Warning => "btn-outline-warning ",
-			ButtonOutlineColorEnum.Info => "btn-outline-info ",
-			ButtonOutlineColorEnum.Light => "btn-outline-light ",
-			ButtonOutlineColorEnum.Dark => "btn-outline-dark ",
-			_ => "",
-		};
-	}
+    private string GetButtonSize()
+    {
+        return Size switch
+        {
+            ControlSizeEnum.Standard => "",
+            ControlSizeEnum.Large => "btn-lg ",
+            ControlSizeEnum.Small => "btn-sm ",
+            _ => "",
+        };
+    }
 
-	private string GetButtonSize()
-	{
-		return Size switch
-		{
-			ControlSizeEnum.Standard => "",
-			ControlSizeEnum.Large => "btn-lg ",
-			ControlSizeEnum.Small => "btn-sm ",
-			_ => "",
-		};
-	}
+    private async Task OnClickHandler()
+    {
+        await OnClick.InvokeAsync();
+    }
 
-	private async Task OnClickHandler()
-	{
-		await OnClick.InvokeAsync();
-	}
-
-	private async Task OnDoubleClickHandler()
-	{
-		await OnDoubleClick.InvokeAsync();
-	}
+    private async Task OnDoubleClickHandler()
+    {
+        await OnDoubleClick.InvokeAsync();
+    }
 
 }
