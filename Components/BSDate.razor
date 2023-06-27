@@ -1,0 +1,57 @@
+﻿@using BlazorBootstrapComponents.Enums
+@using Microsoft.AspNetCore.Components.Forms
+
+
+@{
+	string _class = string.Concat("form-control ",
+							GenerateFunctions.GenerateBackgroundColor(Background),
+							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
+
+	AdditionalAttributes.Remove("class");
+	AdditionalAttributes.Add("class", _class);
+
+	AdditionalAttributes.Remove("id");
+	if (Id.Length > 0) { AdditionalAttributes.Add("id", Id); }
+
+	AdditionalAttributes.Remove("placeholder");
+	if (PlaceHolder.Length > 0) { AdditionalAttributes.Add("placeholder", PlaceHolder); }
+
+	AdditionalAttributes.Remove("disabled");
+	if (Disabled) { AdditionalAttributes.Add("disabled", true); }
+
+	AdditionalAttributes.Remove("readonly");
+	if (ReadOnly) { AdditionalAttributes.Add("readonly", true); }
+
+	AdditionalAttributes.Remove("required");
+	if (Required) { AdditionalAttributes.Add("required", true); }
+
+}
+@if (HorizontalLayout)
+{
+	<div class="row @Class">
+		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
+		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidth)">
+			<input type="date" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+		</div>
+	</div>
+}
+else
+{
+	@if (FloatingLabel)
+	{
+		<div class="form-floating @Class">
+				<input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+			<BSLabel For=@Id>@Title</BSLabel>
+		</div>
+	}
+	else
+	{
+		<div class="@Class">
+		@if (Title != null)
+		{
+			<BSLabel Class=@Class For=@Id>@Title</BSLabel>
+		}
+			<input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+		</div>
+	}
+}
