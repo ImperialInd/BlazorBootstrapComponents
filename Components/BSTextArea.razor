@@ -4,7 +4,8 @@
 @{
 	string _class = string.Concat("form-control ",
 							GenerateFunctions.GenerateBackgroundColor(Background),
-							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
+							GenerateFunctions.GenerateFormControlSize(Size),
+							FieldCssClasses).Trim();
 
 	AdditionalAttributes.Remove("autocomplete");
 	if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
@@ -30,7 +31,7 @@
 			string horizontalClass = GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox);
 		}
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
+			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows @onchange="OnChangeHandler"></InputTextArea>
 			@if (FeedbackInValid != null)
 			{
 				<div id=@FeedbackId class="@horizontalClass invalid-feedback">@FeedbackInValid</div>
@@ -47,7 +48,7 @@ else
 	@if (FloatingLabel)
 	{
 		<div class="form-floating">
-			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
+			<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows @onchange="OnChangeHandler"></InputTextArea>
 			<BSLabel For=@Id>@Title</BSLabel>
 			@if (FeedbackInValid != null)
 			{
@@ -65,7 +66,7 @@ else
 		{
 			<BSLabel For=@Id>@Title</BSLabel>
 		}
-		<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows></InputTextArea>
+		<InputTextArea class=@_class id=@Id @bind-Value=@Value @attributes=@AdditionalAttributes rows=@Rows @onchange="OnChangeHandler"></InputTextArea>
 		@if (FeedbackInValid != null)
 		{
 			<div id=@FeedbackId class="invalid-feedback">@FeedbackInValid</div>

@@ -14,6 +14,7 @@
                             GenerateFunctions.GenerateBackgroundColor(Background),
                             GenerateFunctions.GenerateFormSelectSize(Size),
                             passedClass != null ? passedClass.ToString() : "").Trim();
+    string _style = string.Concat(Width != null ? $"Width: {Width};" : "", Inline ? "display:inline-block; " : "");
     var typeObj = Data.First().GetType();
     var textProp = typeObj.GetProperty(TextField);
     var valueProp = typeObj.GetProperty(ValueField);
@@ -22,7 +23,10 @@
     Attributes.Add("class", _class);
 
     Attributes.Remove("disabled");
-    if(Disabled) Attributes.Add("disable", true);
+    if(Disabled) Attributes.Add("disabled", true);
+
+    Attributes.Remove("style");
+    if(_style.Length > 0) Attributes.Add("style", _style);
 
     Attributes.Remove("id");
     if (Id != null) Attributes.Add("id", Id);
@@ -32,7 +36,7 @@
 {
     <BSRow Class=@Class>
         <BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
-        <div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
+        <div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthDropDown)">
             <InputSelect @attributes=@Attributes Value=@Value ValueExpression=@ValueExpression ValueChanged=@ValueChanged>
                 @if (DefaultLabel != null)
                 {
@@ -101,9 +105,11 @@ else
     [Parameter] public bool HorizontalLayout { get; set; }
     [Parameter] public string TextField { get; set; }
     [Parameter] public string ValueField { get; set; }
+    [Parameter] public string Width { get; set; }
+    [Parameter] public bool Inline { get; set; }
     [Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
     [Parameter] public int[] MediaWidthLabel { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
-    [Parameter] public int[] MediaWidthTextBox { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
+    [Parameter] public int[] MediaWidthDropDown { get; set; } = new int[] { -1, -1, -1, -1, -1, -1 };
     [Parameter] public TextAlignmentEnum[] MediaLabelAlignment { get; set; } = new TextAlignmentEnum[] { TAEmpty, TAEmpty, TAEmpty, TAEmpty, TAEmpty, TAEmpty };
 
     [Parameter] public Dictionary<string, object> Attributes { get; set; } = new Dictionary<string, object>();

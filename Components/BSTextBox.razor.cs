@@ -15,13 +15,13 @@ public partial class BSTextBox
 {
 	protected override void OnInitialized()
 	{
-		if(ValueExpression != null) _fieldIdentifier = FieldIdentifier.Create(ValueExpression);
+		if(ValueExpression != null) fieldIdentifier = FieldIdentifier.Create(ValueExpression);
 		if (Id == null || Id == string.Empty) Id = Guid.NewGuid().ToString();
 		base.OnInitialized();
 	}
 
-	private FieldIdentifier _fieldIdentifier;
-	private string _fieldCssClasses => CascadedEditContext?.FieldCssClass(_fieldIdentifier) ?? "";
+	private FieldIdentifier fieldIdentifier;
+	private string FieldCssClasses => CascadedEditContext?.FieldCssClass(fieldIdentifier) ?? "";
 
 	[CascadingParameter] private EditContext CascadedEditContext { get; set; }
 
@@ -58,14 +58,14 @@ public partial class BSTextBox
 				Value = default;
 				await ValueChanged.InvokeAsync(default);
 				await OnChange.InvokeAsync(default);
-				CascadedEditContext?.NotifyFieldChanged(_fieldIdentifier);
+				CascadedEditContext?.NotifyFieldChanged(fieldIdentifier);
 			}
 			else
 			{
 				string output = input;
 				await ValueChanged.InvokeAsync(output);
 				await OnChange.InvokeAsync(output);
-				CascadedEditContext?.NotifyFieldChanged(_fieldIdentifier);
+				CascadedEditContext?.NotifyFieldChanged(fieldIdentifier);
 			}
 	}
 

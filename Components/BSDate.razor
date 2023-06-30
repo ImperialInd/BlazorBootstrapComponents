@@ -5,15 +5,10 @@
 @{
 	string _class = string.Concat("form-control ",
 							GenerateFunctions.GenerateBackgroundColor(Background),
-							GenerateFunctions.GenerateFormControlSize(Size),
-							FieldCssClasses).Trim();
+							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
 
 	AdditionalAttributes.Remove("class");
 	AdditionalAttributes.Add("class", _class);
-
-	AdditionalAttributes.Remove("autocomplete");
-	if (AutoComplete) { AdditionalAttributes.Add("autocomplete", "on"); }
-	else { AdditionalAttributes.Add("autocomplete", "off"); }
 
 	AdditionalAttributes.Remove("id");
 	if (Id.Length > 0) { AdditionalAttributes.Add("id", Id); }
@@ -35,8 +30,8 @@
 {
 	<div class="row @Class">
 		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
-		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidthTextBox)">
-			<input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidth)">
+			<input type="date" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
 		</div>
 	</div>
 }
