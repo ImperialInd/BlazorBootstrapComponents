@@ -5,7 +5,8 @@
 @{
 	string _class = string.Concat("form-control ",
 							GenerateFunctions.GenerateBackgroundColor(Background),
-							GenerateFunctions.GenerateFormControlSize(Size)).Trim();
+							GenerateFunctions.GenerateFormControlSize(Size),
+							FieldCssClasses).Trim();
 
 	AdditionalAttributes.Remove("class");
 	AdditionalAttributes.Add("class", _class);
