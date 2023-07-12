@@ -31,7 +31,7 @@
 	<div class="row @Class">
 		<BSColumnLabel For=@Id Bold=true Size=@Size MediaWidth=@MediaWidthLabel MediaAlignment=@MediaLabelAlignment>@Title</BSColumnLabel>
 		<div class="@GenerateFunctions.GenerateColumnWidth(MediaWidth)">
-			<input type="date" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+            <InputDate @bind-Value=@Value @onchange="OnChangeHandler" @attributes=@AdditionalAttributes />
 		</div>
 	</div>
 }
@@ -40,7 +40,7 @@ else
 	@if (FloatingLabel)
 	{
 		<div class="form-floating @Class">
-				<input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+			<InputDate @bind-Value=@Value @onchange="OnChangeHandler" @attributes=@AdditionalAttributes />
 			<BSLabel For=@Id>@Title</BSLabel>
 		</div>
 	}
@@ -51,7 +51,7 @@ else
 		{
 			<BSLabel Class=@Class For=@Id>@Title</BSLabel>
 		}
-			<input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
+			<InputDate @bind-Value=@Value @onchange="OnChangeHandler" @attributes=@AdditionalAttributes />
 		</div>
 	}
 }
