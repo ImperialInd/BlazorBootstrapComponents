@@ -27,7 +27,7 @@
     {
         AdditionalAttributes.Remove("type");
         AdditionalAttributes.Remove("aria-label");
-        AdditionalAttributes.Add("type", "button");
+        AdditionalAttributes.Add("type", ButtonType.ToString().ToLower());
         AdditionalAttributes.Add("aria-label", "Close");
     }
     else
@@ -84,6 +84,7 @@ else
     [Parameter] public EventCallback OnClick { get; set; }
     [Parameter] public EventCallback OnDoubleClick { get; set; }
     [Parameter] public IconNamesEnum Icon { get; set; } = IconNamesEnum.Empty;
+    [Parameter] public ButtonTypeEnum ButtonType { get; set; } = ButtonTypeEnum.Button;
 
     private bool _asClose;
     [Parameter] public bool AsClose { get { return _asClose; } set { _asClose = value; } }
