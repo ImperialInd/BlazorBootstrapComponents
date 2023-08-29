@@ -10,5 +10,6 @@ public enum ButtonTypeEnum
 {
     Button,
     Submit,
-    Reset
+    Reset,
+    Div
 }
