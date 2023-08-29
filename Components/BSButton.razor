@@ -13,54 +13,54 @@
     string _style = string.Concat((Width.Length > 0 ? $"width: {Width}; " : ""),
                                 (Height.Length > 0 ? $"height: {Height}; " : "")).Trim();
 
+    AdditionalAttributes.Remove("disabled");
     if (Disabled)
     {
-        AdditionalAttributes.Remove("disabled");
         AdditionalAttributes.Add("disabled", true);
     }
-    else
-    {
-        AdditionalAttributes.Remove("disabled");
-    }
 
+    AdditionalAttributes.Remove("type");
+    AdditionalAttributes.Remove("aria-label");
     if (AsClose || AsAlertClose)
     {
-        AdditionalAttributes.Remove("type");
-        AdditionalAttributes.Remove("aria-label");
         AdditionalAttributes.Add("type", ButtonType.ToString().ToLower());
         AdditionalAttributes.Add("aria-label", "Close");
     }
-    else
+    else if(ButtonType != ButtonTypeEnum.Div)
     {
-        AdditionalAttributes.Remove("type");
-        AdditionalAttributes.Remove("aria-label");
+        AdditionalAttributes.Add("type", ButtonType.ToString().ToLower());
     }
 
+    AdditionalAttributes.Remove("data-bs-dismiss");
     if (AsAlertClose)
     {
-        AdditionalAttributes.Remove("data-bs-dismiss");
         AdditionalAttributes.Add("data-bs-dismiss", "alert");
     }
-    else
+
+    AdditionalAttributes.Remove("style");
+    if (_style.Length > 0)
     {
-        AdditionalAttributes.Remove("data-bs-dismiss");
+        AdditionalAttributes.Add("style", _style);
     }
+
+    AdditionalAttributes.Remove("class");
+    AdditionalAttributes.Add("class", _class);
 
 }
 
-@if (_style.Length > 0)
+@if(ButtonType == ButtonTypeEnum.Div)
 {
-    <button class=@_class style=@_style @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+    <div @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
         @if (Icon != IconNamesEnum.Empty)
         {
             <BSIcon Icon=@Icon>&nbsp;</BSIcon>
         }
         @ChildContent
-    </button>
+    </div>
 }
 else
 {
-    <button class=@_class @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
+    <button @attributes=@AdditionalAttributes @onclick=@OnClickHandler @ondblclick=@OnDoubleClickHandler>
         @if (Icon != IconNamesEnum.Empty)
         {
             <BSIcon Icon=@Icon>&nbsp;</BSIcon>
