@@ -35,6 +35,7 @@ public partial class BSTextBox
 	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
 	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
     [Parameter] public bool Disabled { get; set; }
+	[Parameter] public bool Visible { get; set; } = true;
     [Parameter] public bool ReadOnly { get; set; }
     [Parameter] public bool Required { get; set; }
     [Parameter] public string Title { get; set; } = string.Empty;
