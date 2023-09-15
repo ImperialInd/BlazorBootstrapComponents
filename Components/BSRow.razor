@@ -7,7 +7,7 @@
 }
 @if (RowTemplate == null)	
 {
-<div class="@_class">
+<div id="@Id" class="@_class">
 	@ChildContent
 </div>
 }
@@ -17,9 +17,15 @@ else
 }
 
 @code{
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		if (Id == null) Id = Guid.NewGuid().ToString();
+	}
 	[Parameter] public string Class { get; set; }
 	[Parameter] public RowVerticalAlignmentEnum VerticalAlign { get; set; } = RowVerticalAlignmentEnum.Start;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public RenderFragment RowTemplate { get; set; }
 	[Parameter] public int Gap { get; set; } = 3;
+	[Parameter] public string Id { get; set; }
 }
