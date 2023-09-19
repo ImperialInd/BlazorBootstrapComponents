@@ -10,12 +10,21 @@ public enum BorderColorEnum
 {
 	Empty,
 	Primary,
+	Primary_Subtle,
 	Secondary,
-	Success,
+    Secondary_Subtle,
+    Success,
+    Success_Subtle,
 	Danger,
+    Danger_Subtle,
 	Warning,
+    Warning_Subtle,
 	Info,
+    Info_Subtle,
 	Light,
+    Light_Subtle,
 	Dark,
-	White
+    Dark_Subtle,
+	White,
+    White_Subtle
 }

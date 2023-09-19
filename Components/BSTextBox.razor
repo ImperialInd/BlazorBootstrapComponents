@@ -50,13 +50,11 @@
         }
         else
         {
-            <div class="@Class">
-                @if (Title != null)
-                {
-                    <BSLabel Class=@Class For=@Id>@Title</BSLabel>
-                }
-                <input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
-            </div>
+            @if (Title != null)
+            {
+                <BSLabel Class=@Class For=@Id>@Title</BSLabel>
+            }
+            <input type="text" value="@Value" @attributes=@AdditionalAttributes @onchange="OnChangeHandler" />
         }
     }
 }

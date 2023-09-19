@@ -2,6 +2,7 @@
 @{
 	string _class = string.Concat(IsFormLabel ? "form-label mb-0 " : "",
 								(Bold ? "fw-bold " : ""),
+								(ColumnFormLabel ? "col-form-label " : ""),
 								GenerateFunctions.GenerateFormLabelControlSize(Size),
 								GenerateFunctions.GenerateFontSize(FontSize),
 								GenerateFunctions.GenerateTextColor(Color),
@@ -18,8 +19,6 @@
 @code {
 	protected override void OnInitialized()
 	{
-		if (For == string.Empty) throw new Exception("You must supply the [For] id of the control this label belongs to!");
-
 		AdditionalAttributes.Remove("for");
 		AdditionalAttributes.Add("for", @For);
 
@@ -34,6 +33,7 @@
 	[Parameter] public ControlSizeEnum Size { get; set; } = ControlSizeEnum.Standard;
 	[Parameter] public TextColorEnum Color { get; set; } = TextColorEnum.Empty;
 	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public bool ColumnFormLabel { get; set; }
 
 	private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
 

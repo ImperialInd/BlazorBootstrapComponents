@@ -51,8 +51,38 @@ public static class GenerateFunctions
 	{
 		return BorderColor switch
 		{
-			>= BorderColorEnum.Primary and <= BorderColorEnum.White => $"border-{BorderColor.ToString().ToLower()} ",
+			>= BorderColorEnum.Primary => $"border-{BorderColor.ToString().Replace('_','-').ToLower()} ",
 			_ => "",
+		};
+	}
+
+	public static string GenerateBorderSide(BorderRoundedSideEnum BorderSide)
+	{
+		return BorderSide switch
+		{
+			BorderRoundedSideEnum.None => "",
+			BorderRoundedSideEnum.All => "rounded ",
+			BorderRoundedSideEnum.Top => "rounded-top ",
+			BorderRoundedSideEnum.End => "rounded-end ",
+			BorderRoundedSideEnum.Bottom => "rounded-bottom ",
+			BorderRoundedSideEnum.Start => "rounded-start ",
+			BorderRoundedSideEnum.Circle => "rounded-circle ",
+			BorderRoundedSideEnum.Pill => "rounded-pill ",
+			_ => throw new NotImplementedException()
+		};
+	}
+
+	public static string GenerateBorderSize(BorderRoundedSizeEnum BorderSize)
+	{
+		return BorderSize switch
+		{
+			BorderRoundedSizeEnum.None => "rounded-0 ",
+			BorderRoundedSizeEnum.One => "rounded-1 ",
+			BorderRoundedSizeEnum.Two => "rounded-2 ",
+			BorderRoundedSizeEnum.Three => "rounded-3 ",
+			BorderRoundedSizeEnum.Four => "rounded-4 ",
+			BorderRoundedSizeEnum.Five => "rounded-5 ",
+			_ => throw new NotImplementedException()
 		};
 	}
 

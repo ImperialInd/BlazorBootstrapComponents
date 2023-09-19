@@ -1,13 +1,16 @@
 ﻿@using BlazorBootstrapComponents.Enums
 @{
-	string _class = string.Concat($"gap-{Gap.ToString()} p-2 rounded rounded-2",
-						(Bold ? "fw-bold " : ""),
+	string _class = string.Concat($"gap-{Gap.ToString()} p-2 ",
+						(BorderRounded ? "rounded" : ""),
+						GenerateFunctions.GenerateBorderSide(BorderRoundedSide),
+						GenerateFunctions.GenerateBorderSize(BorderRoundedSize),
 						GenerateFunctions.GenerateBorderColor(BorderColor),
 						GenerateFunctions.GenerateBorder(Border),
 						GenerateFunctions.GenerateBackgroundColor(Background),
 						GenerateFunctions.GenerateShadow(Shadow),
 						GenerateFunctions.GenerateBorderWidth(BorderWidth)).Trim();
-	string _titleClass = string.Concat("fw-bold bg-transparent mb-0 ",
+	string _titleClass = string.Concat("bg-transparent mb-0 ",
+								(Bold ? "fw-bold " : ""),
 								GenerateFunctions.GenerateTextColor(TitleColor),
 								GenerateFunctions.GenerateFontSize(TitleSize)).Trim();
 
@@ -29,9 +32,12 @@
 	[Parameter] public TextColorEnum TitleColor { get; set; } = TextColorEnum.Empty;
 	[Parameter] public FontSizeEnum TitleSize { get; set; } = FontSizeEnum.Empty;
 	[Parameter] public BorderEnum Border { get; set; } = BorderEnum.ShowAll;
-	[Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Secondary;
+	[Parameter] public BorderColorEnum BorderColor { get; set; } = BorderColorEnum.Dark_Subtle;
 	[Parameter] public BorderWidthEnum BorderWidth { get; set; } = BorderWidthEnum.B1;
 	[Parameter] public BackgroundColorEnum Background { get; set; } = BackgroundColorEnum.Empty;
+	[Parameter] public bool BorderRounded { get; set; }
+	[Parameter] public BorderRoundedSideEnum BorderRoundedSide { get; set; } = BorderRoundedSideEnum.All;
+	[Parameter] public BorderRoundedSizeEnum BorderRoundedSize { get; set; } = BorderRoundedSizeEnum.Two;
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public ShadowEnum Shadow { get; set; } = ShadowEnum.None;
 	[Parameter] public int Gap { get; set; } = 1;
