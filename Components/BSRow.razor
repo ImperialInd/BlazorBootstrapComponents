@@ -2,12 +2,40 @@
 
 @{
 	string _class = string.Concat($"row gy-{Gap} ", 
-							Class,
+							Class + " ",
 							GenerateFunctions.GenerateRowVerticalAlignment(VerticalAlign)).Trim();
 }
+
+@if (DataBsDismiss != null)
+{
+	if (AdditionalAttributes.ContainsKey("data-bs-dismiss") == false) AdditionalAttributes.Add("data-bs-dismiss", DataBsDismiss);
+}
+else
+{
+	if (AdditionalAttributes.ContainsKey("data-bs-dismiss")) AdditionalAttributes.Remove("data-bs-dismiss");
+}
+
+@if (DataBsDismiss != null)
+{
+	if (AdditionalAttributes.ContainsKey("aria-label") == false) AdditionalAttributes.Add("aria-label", AriaLabel);
+}
+else
+{
+	if (AdditionalAttributes.ContainsKey("aria-label")) AdditionalAttributes.Remove("aria-label");
+}
+
+@if (Type != null)
+{
+	if (AdditionalAttributes.ContainsKey("type") == false) AdditionalAttributes.Add("type", Type);
+}
+else
+{
+	if (AdditionalAttributes.ContainsKey("type")) AdditionalAttributes.Remove("type");
+}
+
 @if (RowTemplate == null)	
 {
-<div id="@Id" class="@_class">
+	<div id="@Id" class="@_class" @attributes=@AdditionalAttributes>
 	@ChildContent
 </div>
 }
@@ -28,4 +56,10 @@ else
 	[Parameter] public RenderFragment RowTemplate { get; set; }
 	[Parameter] public int Gap { get; set; } = 3;
 	[Parameter] public string Id { get; set; }
+	[Parameter] public string DataBsDismiss { get; set; }
+	[Parameter] public string AriaLabel { get; set; }
+	[Parameter] public string Type { get; set; }
+
+	private Dictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
+
 }
